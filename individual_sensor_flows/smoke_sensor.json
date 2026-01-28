@@ -1,0 +1,759 @@
+[
+    {
+        "id": "505946dca9cb35ba",
+        "type": "tab",
+        "label": "smoke",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "59a696be5514974b",
+        "type": "inject",
+        "z": "505946dca9cb35ba",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 320,
+        "wires": [
+            [
+                "7c41912b1463f467"
+            ]
+        ]
+    },
+    {
+        "id": "7c41912b1463f467",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "login payload",
+        "func": "msg.headers = {\"Content-Type\":\"application/json\"};\nmsg.payload = { login: \"admin\", password: \"654321\" };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 320,
+        "wires": [
+            [
+                "b571660b06519777"
+            ]
+        ]
+    },
+    {
+        "id": "b571660b06519777",
+        "type": "http request",
+        "z": "505946dca9cb35ba",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/login",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 320,
+        "wires": [
+            [
+                "f5cea446e6b55861"
+            ]
+        ]
+    },
+    {
+        "id": "f5cea446e6b55861",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "store sid",
+        "func": "// Try JSON sid first\nlet sid = msg.payload?.data?.sid;\n\n// If not present, try Set-Cookie header\nif (!sid) {\n  const setCookie = msg.headers?.['set-cookie'] || msg.headers?.['Set-Cookie'];\n  // set-cookie may be an array\n  const cookies = Array.isArray(setCookie) ? setCookie : [setCookie].filter(Boolean);\n\n  for (const c of cookies) {\n    const m = String(c).match(/ZWAYSession=([^;]+)/);\n    if (m) { sid = m[1]; break; }\n  }\n}\n\nif (!sid) {\n  node.error(\"Login response did not include sid or ZWAYSession cookie.\", {\n    payload: msg.payload,\n    headers: msg.headers\n  });\n  return null;\n}\n\nglobal.set(\"zway_sid\", sid);\nnode.warn(\"SID stored successfully\");\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b09f15a97dd8d91",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "vDev ID - funtcion",
+        "func": "const devices = msg.payload?.data?.devices || [];\nconst byId = new Map(devices.map(d => [String(d.id), d]));\n\nfunction toNum(x) {\n  const m = String(x ?? \"\").replace(\",\", \".\").match(/-?\\d+(\\.\\d+)?/);\n  return m ? Number(m[0]) : null;\n}\n\nfunction to01(x) {\n  const s = String(x ?? \"\").toLowerCase();\n  if (s === \"on\" || s === \"true\" || s === \"1\") return 1;\n  if (s === \"off\" || s === \"false\" || s === \"0\") return 0;\n  const n = toNum(x);\n  return Number.isFinite(n) ? (n ? 1 : 0) : null;\n}\n\n// Smoke sensor (Node 16) vDev IDs\nconst smokeTemp     = toNum(byId.get(\"ZWayVDev_zway_16-0-49-1\")?.metrics?.level);        // °C\nconst smokeAlarm    = to01(byId.get(\"ZWayVDev_zway_16-0-113-1-2-A\")?.metrics?.level);    // on/off\nconst heatAlarm     = to01(byId.get(\"ZWayVDev_zway_16-0-113-4-2-A\")?.metrics?.level);    // on/off\nconst tamperAlarm   = to01(byId.get(\"ZWayVDev_zway_16-0-113-7-3-A\")?.metrics?.level);    // on/off\nconst lowBatteryAlm = to01(byId.get(\"ZWayVDev_zway_16-0-113-8-10-A\")?.metrics?.level);   // on/off\nconst hwFailureAlm  = to01(byId.get(\"ZWayVDev_zway_16-0-113-9-1-A\")?.metrics?.level);    // on/off\nconst battery       = toNum(byId.get(\"ZWayVDev_zway_16-0-128\")?.metrics?.level);         // %\n\nmsg.payload = {\n  smokeTemp,\n  smokeAlarm,\n  heatAlarm,\n  tamperAlarm,\n  lowBatteryAlm,\n  hwFailureAlm,\n  battery,\n  ts: Date.now()\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 460,
+        "wires": [
+            [
+                "e5f393f2f60c17f7"
+            ]
+        ]
+    },
+    {
+        "id": "e5f393f2f60c17f7",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "Make UI Messages",
+        "func": "const p = msg.payload;\n\nconst msgs = [\n  { topic: \"smoke.temp\",          payload: p.smokeTemp },\n  { topic: \"smoke.smokeAlarm\",    payload: p.smokeAlarm },\n  { topic: \"smoke.heatAlarm\",     payload: p.heatAlarm },\n  { topic: \"smoke.tamper\",        payload: p.tamperAlarm },\n  { topic: \"smoke.lowBattery\",    payload: p.lowBatteryAlm },\n  { topic: \"smoke.hardwareFail\",  payload: p.hwFailureAlm },\n  { topic: \"smoke.battery\",       payload: p.battery }\n];\n\nreturn [msgs]; // IMPORTANT\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 460,
+        "wires": [
+            [
+                "6400173c455a2a24"
+            ]
+        ]
+    },
+    {
+        "id": "7d56e66732611c7c",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 460,
+        "wires": [
+            [
+                "4fcfa27e52461ac8"
+            ]
+        ]
+    },
+    {
+        "id": "4fcfa27e52461ac8",
+        "type": "http request",
+        "z": "505946dca9cb35ba",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 690,
+        "y": 460,
+        "wires": [
+            [
+                "5b09f15a97dd8d91"
+            ]
+        ]
+    },
+    {
+        "id": "ff4450db28f88567",
+        "type": "inject",
+        "z": "505946dca9cb35ba",
+        "name": "Start influxDB Move",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 460,
+        "wires": [
+            [
+                "7d56e66732611c7c"
+            ]
+        ]
+    },
+    {
+        "id": "70e299e8c1f8c362",
+        "type": "ui-gauge",
+        "z": "505946dca9cb35ba",
+        "name": "Temperature (°C)",
+        "group": "ad0a25ddcf4b6825",
+        "order": 3,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "6",
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Smoke Sensor Temperature (°C)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-10",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "25",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "70",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "-10",
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1890,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a6495a8eb775a2db",
+        "type": "ui-text",
+        "z": "505946dca9cb35ba",
+        "group": "ad0a25ddcf4b6825",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Smoke Alarm",
+        "label": "Smoke Alarm :",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1890,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "bb410e2c47d0083c",
+        "type": "ui-text",
+        "z": "505946dca9cb35ba",
+        "group": "ad0a25ddcf4b6825",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Heat Alarm",
+        "label": "Heat Alarm :",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1890,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "71030406b7764b5c",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 340,
+        "wires": [
+            [
+                "70e299e8c1f8c362"
+            ]
+        ]
+    },
+    {
+        "id": "64f45c125f424942",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"ON\" : \"OFF\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1570,
+        "y": 380,
+        "wires": [
+            [
+                "a6495a8eb775a2db"
+            ]
+        ]
+    },
+    {
+        "id": "caa76b20eb463723",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"ON\" : \"OFF\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1570,
+        "y": 420,
+        "wires": [
+            [
+                "bb410e2c47d0083c"
+            ]
+        ]
+    },
+    {
+        "id": "6400173c455a2a24",
+        "type": "switch",
+        "z": "505946dca9cb35ba",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "smoke.temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.smokeAlarm",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.heatAlarm",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.tamper",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.lowBattery",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.hardwareFail",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.battery",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 7,
+        "x": 1350,
+        "y": 460,
+        "wires": [
+            [
+                "71030406b7764b5c",
+                "4c833c7e5cf7ce82"
+            ],
+            [
+                "64f45c125f424942",
+                "0819062506bca0c4"
+            ],
+            [
+                "caa76b20eb463723",
+                "0819062506bca0c4"
+            ],
+            [
+                "0819062506bca0c4",
+                "c8b0292d9ab91071"
+            ],
+            [],
+            [],
+            [
+                "bc917edc04569137"
+            ]
+        ]
+    },
+    {
+        "id": "bc917edc04569137",
+        "type": "ui-gauge",
+        "z": "505946dca9cb35ba",
+        "name": "Battery",
+        "group": "ad0a25ddcf4b6825",
+        "order": 4,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "6",
+        "height": "2",
+        "gtype": "gauge-battery",
+        "gstyle": "needle",
+        "title": "Battery",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#f73918",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "15",
+                "color": "#cfa120",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "35",
+                "color": "#fdd853",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "80",
+                "color": "#2dbe36",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1500,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4c833c7e5cf7ce82",
+        "type": "change",
+        "z": "505946dca9cb35ba",
+        "name": "Temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "smoke.temp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1830,
+        "y": 680,
+        "wires": [
+            [
+                "01e5a0271c823d62"
+            ]
+        ]
+    },
+    {
+        "id": "c8b0292d9ab91071",
+        "type": "change",
+        "z": "505946dca9cb35ba",
+        "name": "smoke tamper",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "smoke.tamper",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1860,
+        "y": 720,
+        "wires": [
+            [
+                "01e5a0271c823d62"
+            ]
+        ]
+    },
+    {
+        "id": "01e5a0271c823d62",
+        "type": "join",
+        "z": "505946dca9cb35ba",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "2",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 2050,
+        "y": 660,
+        "wires": [
+            [
+                "d9742ebb5edb72d9"
+            ]
+        ]
+    },
+    {
+        "id": "0113d93637a7c868",
+        "type": "influxdb out",
+        "z": "505946dca9cb35ba",
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "smart_echo Bucket",
+        "measurement": "smoke",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Rgroup",
+        "bucket": "smart_echo",
+        "x": 2470,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "d9742ebb5edb72d9",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "function 5",
+        "func": "const p = msg.payload || {};\n\n// --- helpers ---\nfunction toFloat(v) {\n  const n = Number(v);\n  return Number.isFinite(n) ? n : null;\n}\n\n// Convert tamper states to 0/1\nfunction tamperToInt(v) {\n  const s = String(v).toLowerCase();\n\n  // stable / ok / no tamper = 0\n  if (s.includes(\"stable\") || s.includes(\"ok\") || s.includes(\"no\")) return 0;\n\n  // triggered / alarm / tamper = 1\n  if (s.includes(\"tamper\") || s.includes(\"alarm\") || s.includes(\"trigger\")) return 1;\n\n  // numeric fallback\n  const n = Number(v);\n  if (Number.isFinite(n)) return n ? 1 : 0;\n\n  return null;\n}\n\n// --- read dotted keys from Join output ---\nconst temp   = toFloat(p[\"smoke.temp\"]);\nconst tamper = tamperToInt(p[\"smoke.tamper\"]);\n\n// If missing, skip write\nif (temp === null || tamper === null) return null;\n\n// Fields (store numeric fields)\nconst fields = {\n  smoke_temp: temp,\n  smoke_tamper: tamper\n};\n\n// Tags\nconst tags = {\n  device: \"smoke\",\n  source: \"zway\"\n};\n\n// Write to Influx\nmsg.payload = [fields, tags];\nmsg.measurement = \"smoke\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2200,
+        "y": 660,
+        "wires": [
+            [
+                "0113d93637a7c868"
+            ]
+        ]
+    },
+    {
+        "id": "0819062506bca0c4",
+        "type": "debug",
+        "z": "505946dca9cb35ba",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1940,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "ad0a25ddcf4b6825",
+        "type": "ui-group",
+        "name": "Smoke Sensor",
+        "page": "351b470c1755e821",
+        "width": 6,
+        "height": 1,
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "6c9ec3115d61e7d3",
+        "type": "influxdb",
+        "hostname": "localhost",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "351b470c1755e821",
+        "type": "ui-page",
+        "name": "SmartEcho",
+        "ui": "a5694dd5abd38f3c",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c4f6fa946f29d2bb",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "a5694dd5abd38f3c",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "notifications",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "c4f6fa946f29d2bb",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#92aaab",
+            "primary": "#73a0a5",
+            "bgPage": "#c3c1c1",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "aa75533d626646d4",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.30.0",
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    }
+]

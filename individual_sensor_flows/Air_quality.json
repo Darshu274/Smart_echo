@@ -1,0 +1,1044 @@
+[
+    {
+        "id": "551a1ce9fa52ece8",
+        "type": "tab",
+        "label": "Air Quality",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ab2211fdaf26c15b",
+        "type": "inject",
+        "z": "551a1ce9fa52ece8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "83cd9e01f4701610"
+            ]
+        ]
+    },
+    {
+        "id": "83cd9e01f4701610",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "login payload",
+        "func": "msg.headers = {\"Content-Type\":\"application/json\"};\nmsg.payload = { login: \"admin\", password: \"654321\" };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 60,
+        "wires": [
+            [
+                "3bb376d79493747f"
+            ]
+        ]
+    },
+    {
+        "id": "3bb376d79493747f",
+        "type": "http request",
+        "z": "551a1ce9fa52ece8",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/login",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 60,
+        "wires": [
+            [
+                "216b3fab28a4ec10"
+            ]
+        ]
+    },
+    {
+        "id": "216b3fab28a4ec10",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "store sid",
+        "func": "// Try JSON sid first\nlet sid = msg.payload?.data?.sid;\n\n// If not present, try Set-Cookie header\nif (!sid) {\n  const setCookie = msg.headers?.['set-cookie'] || msg.headers?.['Set-Cookie'];\n  // set-cookie may be an array\n  const cookies = Array.isArray(setCookie) ? setCookie : [setCookie].filter(Boolean);\n\n  for (const c of cookies) {\n    const m = String(c).match(/ZWAYSession=([^;]+)/);\n    if (m) { sid = m[1]; break; }\n  }\n}\n\nif (!sid) {\n  node.error(\"Login response did not include sid or ZWAYSession cookie.\", {\n    payload: msg.payload,\n    headers: msg.headers\n  });\n  return null;\n}\n\nglobal.set(\"zway_sid\", sid);\nnode.warn(\"SID stored successfully\");\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a19770858ae4bc2e",
+        "type": "debug",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "98c2e12d54eb393f",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "Find node vDevs",
+        "func": "const NODE = 16; // change to your smoke node / plug node / leak node / vibration node\nconst devices = msg.payload?.data?.devices || [];\n\nconst hits = devices\n  .filter(d => String(d.id).includes(`zway_${NODE}-`))\n  .map(d => ({\n    id: d.id,\n    title: d.metrics?.title,\n    probeTitle: d.metrics?.probeTitle,\n    level: d.metrics?.level,\n    unit: d.metrics?.scaleTitle || d.metrics?.unit || \"\"\n  }));\n\nmsg.payload = hits;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 780,
+        "wires": [
+            [
+                "a19770858ae4bc2e"
+            ]
+        ]
+    },
+    {
+        "id": "61172f7c593266ce",
+        "type": "inject",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 780,
+        "wires": [
+            [
+                "67f89c8690c38119"
+            ]
+        ]
+    },
+    {
+        "id": "67f89c8690c38119",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 780,
+        "wires": [
+            [
+                "da9c3fcc91417bd5"
+            ]
+        ]
+    },
+    {
+        "id": "da9c3fcc91417bd5",
+        "type": "http request",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 550,
+        "y": 780,
+        "wires": [
+            [
+                "98c2e12d54eb393f"
+            ]
+        ]
+    },
+    {
+        "id": "5d0b9ae394684ada",
+        "type": "inject",
+        "z": "551a1ce9fa52ece8",
+        "name": "Start influxDB Move",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "2ec76b1acc8bd837"
+            ]
+        ]
+    },
+    {
+        "id": "2ec76b1acc8bd837",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "d46b77e3c8ea1481"
+            ]
+        ]
+    },
+    {
+        "id": "d46b77e3c8ea1481",
+        "type": "http request",
+        "z": "551a1ce9fa52ece8",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 590,
+        "y": 320,
+        "wires": [
+            [
+                "9aa287e14168e529"
+            ]
+        ]
+    },
+    {
+        "id": "9aa287e14168e529",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "vDev ID - funtcion",
+        "func": "\nconst devices = msg.payload?.data?.devices || [];\nconst byId = new Map(devices.map(d => [String(d.id), d]));\n\nfunction toNum(x) {\n    const m = String(x ?? \"\").replace(\",\", \".\").match(/-?\\d+(\\.\\d+)?/);\n    return m ? Number(m[0]) : null;\n}\n\n// Your confirmed vDev IDs\nconst T = toNum(byId.get(\"ZWayVDev_zway_20-0-49-1\")?.metrics?.level);   // °C\nconst RH = toNum(byId.get(\"ZWayVDev_zway_20-0-49-5\")?.metrics?.level);   // %\nconst DP = toNum(byId.get(\"ZWayVDev_zway_20-0-49-11\")?.metrics?.level);  // °C (already provided!)\nconst CO2 = toNum(byId.get(\"ZWayVDev_zway_20-0-49-17\")?.metrics?.level);  // ppm\nconst VOC = toNum(byId.get(\"ZWayVDev_zway_20-0-49-39\")?.metrics?.level);  // (unit unknown)\n\n// Optional VOC alarm (on/off)\nconst vocAlarmRaw = byId.get(\"ZWayVDev_zway_20-0-113-13-6-A\")?.metrics?.level;\nconst vocAlarm = (String(vocAlarmRaw).toLowerCase() === \"on\") ? 1 : 0;\n\nmsg.payload = {\n    temperature: T,\n    humidity: RH,\n    dewPoint: DP,\n    co2: CO2,\n    voc: VOC,\n    vocAlarm: vocAlarm,\n    ts: Date.now()\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 320,
+        "wires": [
+            [
+                "15b2442a0c449315"
+            ]
+        ]
+    },
+    {
+        "id": "453eb2f158a5cf6e",
+        "type": "ui-gauge",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "Temperature (°C)",
+        "group": "9fe4bb7030298660",
+        "order": 3,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperature (°C)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-10",
+                "color": "#5cd6d4",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "30",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "60",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "value"
+            }
+        ],
+        "min": "-10",
+        "max": "60",
+        "sizeThickness": "20",
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1450,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8915da623cdc99e2",
+        "type": "ui-gauge",
+        "z": "551a1ce9fa52ece8",
+        "name": "Humidity (%)",
+        "group": "9fe4bb7030298660",
+        "order": 2,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Humidity (%)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "20",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "40",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "80",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "value"
+            }
+        ],
+        "min": "20",
+        "max": "100",
+        "sizeThickness": "16",
+        "sizeGap": 4,
+        "sizeKeyThickness": "9",
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1450,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ab97741af5cde2c0",
+        "type": "ui-gauge",
+        "z": "551a1ce9fa52ece8",
+        "name": "Dew point (°C)",
+        "group": "9fe4bb7030298660",
+        "order": 4,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Dew point (°C)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-10",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "1",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "20",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "-10",
+        "max": "30",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1460,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b151f2759c8a6e8",
+        "type": "ui-text",
+        "z": "551a1ce9fa52ece8",
+        "group": "9fe4bb7030298660",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "VOC Alarm",
+        "label": "VOC Alarm :   ",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Palatino Linotype,Palatino,Book Antiqua,serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1410,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "15b2442a0c449315",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "Make UI Messages",
+        "func": "const p = msg.payload;\n\nconst msgs = [\n  { topic: \"temperature\", payload: p.temperature },\n  { topic: \"humidity\",    payload: p.humidity },\n  { topic: \"dewPoint\",    payload: p.dewPoint },\n  { topic: \"co2\",         payload: p.co2 },\n  { topic: \"voc\",         payload: p.voc },\n  { topic: \"vocAlarm\",    payload: p.vocAlarm }\n];\n\n// IMPORTANT: wrap msgs in an array because the function node has 1 output\nreturn [msgs];\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 460,
+        "wires": [
+            [
+                "a59ce3cf5381017b"
+            ]
+        ]
+    },
+    {
+        "id": "a59ce3cf5381017b",
+        "type": "switch",
+        "z": "551a1ce9fa52ece8",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "temperature",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "humidity",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "dewPoint",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "co2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "voc",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vocAlarm",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 6,
+        "x": 1050,
+        "y": 260,
+        "wires": [
+            [
+                "453eb2f158a5cf6e",
+                "cd8a920edfc2efb7",
+                "5392005f88844d05"
+            ],
+            [
+                "8915da623cdc99e2",
+                "4de06fe208da7bc3"
+            ],
+            [
+                "ab97741af5cde2c0",
+                "df520360626479b9"
+            ],
+            [
+                "d33dd347a777ce2b",
+                "eff0831a346789da"
+            ],
+            [
+                "5e4939ba818dbcd1"
+            ],
+            [
+                "c6d43753af2d39bb"
+            ]
+        ]
+    },
+    {
+        "id": "c6d43753af2d39bb",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "converter",
+        "func": "msg.payload = msg.payload === 1 ? \"ON\" : \"OFF\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1240,
+        "y": 580,
+        "wires": [
+            [
+                "5b151f2759c8a6e8"
+            ]
+        ]
+    },
+    {
+        "id": "d33dd347a777ce2b",
+        "type": "ui-chart",
+        "z": "551a1ce9fa52ece8",
+        "group": "9fe4bb7030298660",
+        "name": "CO2 trend",
+        "label": "chart",
+        "order": 6,
+        "chartType": "area",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": true,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": true,
+        "removeOlder": "5",
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#f00f0f"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#d81313"
+        ],
+        "gridColorDefault": true,
+        "width": "6",
+        "height": "4",
+        "className": "",
+        "interpolation": "step",
+        "x": 1450,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cd8a920edfc2efb7",
+        "type": "change",
+        "z": "551a1ce9fa52ece8",
+        "name": "Temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "temperature",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 360,
+        "wires": [
+            [
+                "c5c5efd031c7a333"
+            ]
+        ]
+    },
+    {
+        "id": "4de06fe208da7bc3",
+        "type": "change",
+        "z": "551a1ce9fa52ece8",
+        "name": "humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "humidity",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1500,
+        "y": 400,
+        "wires": [
+            [
+                "c5c5efd031c7a333"
+            ]
+        ]
+    },
+    {
+        "id": "df520360626479b9",
+        "type": "change",
+        "z": "551a1ce9fa52ece8",
+        "name": "Dew",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "dewPoint",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 440,
+        "wires": [
+            [
+                "c5c5efd031c7a333"
+            ]
+        ]
+    },
+    {
+        "id": "eff0831a346789da",
+        "type": "change",
+        "z": "551a1ce9fa52ece8",
+        "name": "Co2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "co2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 480,
+        "wires": [
+            [
+                "c5c5efd031c7a333"
+            ]
+        ]
+    },
+    {
+        "id": "5e4939ba818dbcd1",
+        "type": "change",
+        "z": "551a1ce9fa52ece8",
+        "name": "VoC",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "voc",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 520,
+        "wires": [
+            [
+                "c5c5efd031c7a333"
+            ]
+        ]
+    },
+    {
+        "id": "c5c5efd031c7a333",
+        "type": "join",
+        "z": "551a1ce9fa52ece8",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "2",
+        "count": "5",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1670,
+        "y": 440,
+        "wires": [
+            [
+                "6f8846a644973901"
+            ]
+        ]
+    },
+    {
+        "id": "6f8846a644973901",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "function 1",
+        "func": "function num(v) {\n  const n = Number(v);\n  return Number.isFinite(n) ? n : null;\n}\n\nconst p = msg.payload || {};\n\n// Fields = what you store in Influx\nconst fields = {\n  temperature: num(p.temperature),\n  humidity: num(p.humidity),\n  dewPoint: num(p.dewPoint),\n  co2: num(p.co2),\n  voc: num(p.voc)\n};\n\n// If any value missing, don't write\nif (Object.values(fields).some(v => v === null)) return null;\n\n// Tags (optional)\nconst tags = {\n  device: \"air_quality\",\n  source: \"zway\"\n};\n\n// Format for influxdb out node (InfluxDB 2.x node-red-contrib-influxdb)\nmsg.payload = [fields, tags];\nmsg.measurement = \"air_quality\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 440,
+        "wires": [
+            [
+                "872d66e366a365b4"
+            ]
+        ]
+    },
+    {
+        "id": "872d66e366a365b4",
+        "type": "influxdb out",
+        "z": "551a1ce9fa52ece8",
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "smart_echo Bucket",
+        "measurement": "air_quality",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Rgroup",
+        "bucket": "smart_echo",
+        "x": 2070,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "5392005f88844d05",
+        "type": "ui-chart",
+        "z": "551a1ce9fa52ece8",
+        "group": "9fe4bb7030298660",
+        "name": "",
+        "label": "Temperature",
+        "order": 5,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": true,
+        "removeOlder": "5",
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#fd7a08",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "6",
+        "height": "4",
+        "className": "",
+        "interpolation": "linear",
+        "x": 1430,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9fe4bb7030298660",
+        "type": "ui-group",
+        "name": "Qaulity Of Air In The Room",
+        "page": "351b470c1755e821",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "6c9ec3115d61e7d3",
+        "type": "influxdb",
+        "hostname": "localhost",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "351b470c1755e821",
+        "type": "ui-page",
+        "name": "SmartEcho",
+        "ui": "a5694dd5abd38f3c",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c4f6fa946f29d2bb",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "a5694dd5abd38f3c",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "notifications",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "c4f6fa946f29d2bb",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#92aaab",
+            "primary": "#73a0a5",
+            "bgPage": "#c3c1c1",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "d64beb13bc874c04",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.30.0",
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    }
+]

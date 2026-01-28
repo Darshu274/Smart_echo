@@ -1,0 +1,959 @@
+[
+    {
+        "id": "e77b158f9548e1ec",
+        "type": "tab",
+        "label": "Plug",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "776c79960157c34e",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "vDev ID - funtcion",
+        "func": "const devices = msg.payload?.data?.devices || [];\nconst byId = new Map(devices.map(d => [String(d.id), d]));\n\nfunction level(id) {\n  return byId.get(String(id))?.metrics?.level;\n}\n\nfunction toNum(x) {\n  const m = String(x ?? \"\").replace(\",\", \".\").match(/-?\\d+(\\.\\d+)?/);\n  return m ? Number(m[0]) : null;\n}\n\nfunction to01(x) {\n  const s = String(x ?? \"\").toLowerCase();\n  if (s === \"on\" || s === \"true\" || s === \"1\") return 1;\n  if (s === \"off\" || s === \"false\" || s === \"0\") return 0;\n  const n = toNum(x);\n  return Number.isFinite(n) ? (n ? 1 : 0) : null;\n}\n\nmsg.payload = {\n  plug: {\n    switch:     to01(level(\"ZWayVDev_zway_17-0-37\")),\n    powerW:     toNum(level(\"ZWayVDev_zway_17-0-49-4\")),\n    energyKWh:  toNum(level(\"ZWayVDev_zway_17-0-50-0\")),\n    electricW:  toNum(level(\"ZWayVDev_zway_17-0-50-2\")), // optional\n    overCurrent:to01(level(\"ZWayVDev_zway_17-0-113-8-6-A\")),\n    overLoad:   to01(level(\"ZWayVDev_zway_17-0-113-8-8-A\")),\n  },\n\n  ts: Date.now()\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 540,
+        "wires": [
+            [
+                "7018c7f2973855b8"
+            ]
+        ]
+    },
+    {
+        "id": "b866c86d39b9c272",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 540,
+        "wires": [
+            [
+                "45c7797aed31eec6"
+            ]
+        ]
+    },
+    {
+        "id": "45c7797aed31eec6",
+        "type": "http request",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 550,
+        "y": 540,
+        "wires": [
+            [
+                "776c79960157c34e"
+            ]
+        ]
+    },
+    {
+        "id": "7018c7f2973855b8",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "Make UI Messages",
+        "func": "const p = msg.payload;\n\nconst msgs = [\n  // Plug\n  { topic: \"plug.switch\", payload: p.plug.switch },\n  { topic: \"plug.power\", payload: p.plug.powerW },\n  { topic: \"plug.energy\", payload: p.plug.energyKWh },\n  { topic: \"plug.overCurrent\", payload: p.plug.overCurrent },\n  { topic: \"plug.overLoad\", payload: p.plug.overLoad },\n\n];\n\nreturn [msgs];   // IMPORTANT\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 540,
+        "wires": [
+            [
+                "28713075d22530d2"
+            ]
+        ]
+    },
+    {
+        "id": "28713075d22530d2",
+        "type": "switch",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "plug.switch",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "plug.power",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "plug.energy",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "plug.overCurrent",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "plug.overLoad",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 5,
+        "x": 1150,
+        "y": 540,
+        "wires": [
+            [
+                "7b30b40ae7371bfd"
+            ],
+            [
+                "1bfa737023432834"
+            ],
+            [
+                "0641c529f1be2454"
+            ],
+            [
+                "af259630eb121397"
+            ],
+            [
+                "45d50d0adf3a86ce"
+            ]
+        ]
+    },
+    {
+        "id": "036d1bdcb99c5e2f",
+        "type": "ui-gauge",
+        "z": "e77b158f9548e1ec",
+        "name": "Power Gauge",
+        "group": "f51783401afac088",
+        "order": 5,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Power (W)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "W",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "800",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "1800",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "2500",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1680,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f4d3f67856893e9",
+        "type": "ui-gauge",
+        "z": "e77b158f9548e1ec",
+        "name": "Energy (kWh)",
+        "group": "f51783401afac088",
+        "order": 6,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Energy (kWh)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "kWh",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "15",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "40",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "50",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1680,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b72eb1a0e4daf89e",
+        "type": "ui-text",
+        "z": "e77b158f9548e1ec",
+        "group": "f51783401afac088",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Over-current",
+        "label": "Over-current : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1670,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "4075298e651f9f17",
+        "type": "ui-text",
+        "z": "e77b158f9548e1ec",
+        "group": "f51783401afac088",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Over-load",
+        "label": "Over-load : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1660,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "1bfa737023432834",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1430,
+        "y": 340,
+        "wires": [
+            [
+                "036d1bdcb99c5e2f",
+                "bb4a9ea25608c426"
+            ]
+        ]
+    },
+    {
+        "id": "0641c529f1be2454",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1430,
+        "y": 380,
+        "wires": [
+            [
+                "6f4d3f67856893e9",
+                "06ac053b1f3ca69c"
+            ]
+        ]
+    },
+    {
+        "id": "af259630eb121397",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"Current Overload\" : \"Stable\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 420,
+        "wires": [
+            [
+                "b72eb1a0e4daf89e",
+                "4f9ceece5f92ff20"
+            ]
+        ]
+    },
+    {
+        "id": "45d50d0adf3a86ce",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"Energy Overload\" : \"Stable\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 460,
+        "wires": [
+            [
+                "4075298e651f9f17",
+                "513a3ffbd368778a"
+            ]
+        ]
+    },
+    {
+        "id": "1076f69e3ee7ba30",
+        "type": "inject",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 240,
+        "wires": [
+            [
+                "62ab4c7bb94807d9"
+            ]
+        ]
+    },
+    {
+        "id": "62ab4c7bb94807d9",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "login payload",
+        "func": "msg.headers = {\"Content-Type\":\"application/json\"};\nmsg.payload = { login: \"admin\", password: \"654321\" };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 240,
+        "wires": [
+            [
+                "292dec60ce851313"
+            ]
+        ]
+    },
+    {
+        "id": "292dec60ce851313",
+        "type": "http request",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/login",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 650,
+        "y": 240,
+        "wires": [
+            [
+                "b667f12b34b4cc49"
+            ]
+        ]
+    },
+    {
+        "id": "b667f12b34b4cc49",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "store sid",
+        "func": "// Try JSON sid first\nlet sid = msg.payload?.data?.sid;\n\n// If not present, try Set-Cookie header\nif (!sid) {\n  const setCookie = msg.headers?.['set-cookie'] || msg.headers?.['Set-Cookie'];\n  // set-cookie may be an array\n  const cookies = Array.isArray(setCookie) ? setCookie : [setCookie].filter(Boolean);\n\n  for (const c of cookies) {\n    const m = String(c).match(/ZWAYSession=([^;]+)/);\n    if (m) { sid = m[1]; break; }\n  }\n}\n\nif (!sid) {\n  node.error(\"Login response did not include sid or ZWAYSession cookie.\", {\n    payload: msg.payload,\n    headers: msg.headers\n  });\n  return null;\n}\n\nglobal.set(\"zway_sid\", sid);\nnode.warn(\"SID stored successfully\");\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "60c59ba69583eccd",
+        "type": "inject",
+        "z": "e77b158f9548e1ec",
+        "name": "Start influxDB Move",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 540,
+        "wires": [
+            [
+                "b866c86d39b9c272"
+            ]
+        ]
+    },
+    {
+        "id": "bb4a9ea25608c426",
+        "type": "change",
+        "z": "e77b158f9548e1ec",
+        "name": "power gauge",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "plug.power",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1630,
+        "y": 560,
+        "wires": [
+            [
+                "bb6282d64577862d"
+            ]
+        ]
+    },
+    {
+        "id": "06ac053b1f3ca69c",
+        "type": "change",
+        "z": "e77b158f9548e1ec",
+        "name": "Energy",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "plug.energy",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1620,
+        "y": 600,
+        "wires": [
+            [
+                "bb6282d64577862d"
+            ]
+        ]
+    },
+    {
+        "id": "4f9ceece5f92ff20",
+        "type": "change",
+        "z": "e77b158f9548e1ec",
+        "name": "Over-current",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "plug.overCurrent",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1630,
+        "y": 640,
+        "wires": [
+            [
+                "bb6282d64577862d"
+            ]
+        ]
+    },
+    {
+        "id": "513a3ffbd368778a",
+        "type": "change",
+        "z": "e77b158f9548e1ec",
+        "name": "Over-load",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "plug.overLoad",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1620,
+        "y": 680,
+        "wires": [
+            [
+                "bb6282d64577862d"
+            ]
+        ]
+    },
+    {
+        "id": "bb6282d64577862d",
+        "type": "join",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "2",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1910,
+        "y": 580,
+        "wires": [
+            [
+                "f203b85e22fe7b0a"
+            ]
+        ]
+    },
+    {
+        "id": "f203b85e22fe7b0a",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "function 7",
+        "func": "const p = msg.payload || {};\n\nfunction toFloat(v) {\n  const n = Number(v);\n  return Number.isFinite(n) ? n : null;\n}\n\nfunction stateToInt(v) {\n  const s = String(v).toLowerCase().trim();\n\n  // not active\n  if (\n    s === \"0\" || s === \"false\" ||\n    s.includes(\"off\") || s.includes(\"idle\") || s.includes(\"clear\") ||\n    s.includes(\"stable\") || s.includes(\"ok\") || s.includes(\"normal\") ||\n    s.includes(\"no\") || s.includes(\"none\")\n  ) return 0;\n\n  // active\n  if (\n    s === \"1\" || s === \"true\" ||\n    s.includes(\"on\") || s.includes(\"alarm\") ||\n    s.includes(\"over\") || s.includes(\"trigger\") ||\n    s.includes(\"detect\") || s.includes(\"breach\")\n  ) return 1;\n\n  const n = Number(v);\n  if (Number.isFinite(n)) return n ? 1 : 0;\n\n  return null;\n}\n\n// Read dotted keys from Join output\nconst power = toFloat(p[\"plug.power\"]);\nconst energy = toFloat(p[\"plug.energy\"]);\nconst overCurrent = stateToInt(p[\"plug.overCurrent\"]);\nconst overLoad = stateToInt(p[\"plug.overLoad\"]);\n\n// If missing, warn and skip write\nconst missing = [];\nif (power === null) missing.push(\"plug.power\");\nif (energy === null) missing.push(\"plug.energy\");\nif (overCurrent === null) missing.push(\"plug.overCurrent\");\nif (overLoad === null) missing.push(\"plug.overLoad\");\n\nif (missing.length) {\n  node.warn(\"Missing/invalid fields: \" + missing.join(\", \") + \" | payload=\" + JSON.stringify(p));\n  return null;\n}\n\n// Write to Influx\nmsg.payload = [\n  {\n    plug_power: power,          // watts (usually)\n    plug_energy: energy,        // kWh or Wh depending on device\n    plug_overCurrent: overCurrent, // 0/1\n    plug_overLoad: overLoad        // 0/1\n  },\n  { device: \"plug\", source: \"zway\" }\n];\n\nmsg.measurement = \"plug\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2060,
+        "y": 580,
+        "wires": [
+            [
+                "441103409e046ca8"
+            ]
+        ]
+    },
+    {
+        "id": "7343c1c5bc69b099",
+        "type": "debug",
+        "z": "e77b158f9548e1ec",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2840,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "441103409e046ca8",
+        "type": "influxdb out",
+        "z": "e77b158f9548e1ec",
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "smart_echo Bucket",
+        "measurement": "plug",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Rgroup",
+        "bucket": "smart_echo",
+        "x": 2250,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "97d10ba9a0b31c46",
+        "type": "ui-switch",
+        "z": "e77b158f9548e1ec",
+        "d": true,
+        "name": "Switch",
+        "label": "switch",
+        "group": "f51783401afac088",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": false,
+        "topic": "payload",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "layout": "row-left",
+        "clickableArea": "label",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 670,
+        "y": 920,
+        "wires": [
+            [
+                "e6f777037e5e5cab"
+            ]
+        ]
+    },
+    {
+        "id": "e6f777037e5e5cab",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "d": true,
+        "name": "function 9",
+        "func": "const host = \"http://10.183.67.137:8083\";\nconst vdev = \"ZWayVDev_zway_17-0-37\";\n\nmsg.method = \"GET\";\nmsg.url = `${host}/ZAutomation/api/v1/devices/${vdev}/command/${msg.payload}`;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 920,
+        "wires": [
+            [
+                "55126cf0c3c49680"
+            ]
+        ]
+    },
+    {
+        "id": "55126cf0c3c49680",
+        "type": "http request",
+        "z": "e77b158f9548e1ec",
+        "d": true,
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices/ZWayVDev_zway_17-0-37/command/on",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1130,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7b30b40ae7371bfd",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"ON\" : \"OFF\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 300,
+        "wires": [
+            [
+                "b0f8ba9c35833b8e"
+            ]
+        ]
+    },
+    {
+        "id": "b0f8ba9c35833b8e",
+        "type": "ui-text",
+        "z": "e77b158f9548e1ec",
+        "group": "f51783401afac088",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "PLUG",
+        "label": "Plug Status : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1650,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "0bbbde87c2767410",
+        "type": "http request",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "persist": false,
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 410,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f51783401afac088",
+        "type": "ui-group",
+        "name": "Smart Plug",
+        "page": "351b470c1755e821",
+        "width": 6,
+        "height": 1,
+        "order": 5,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "6c9ec3115d61e7d3",
+        "type": "influxdb",
+        "hostname": "localhost",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "351b470c1755e821",
+        "type": "ui-page",
+        "name": "SmartEcho",
+        "ui": "a5694dd5abd38f3c",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c4f6fa946f29d2bb",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "a5694dd5abd38f3c",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "notifications",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "c4f6fa946f29d2bb",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#92aaab",
+            "primary": "#73a0a5",
+            "bgPage": "#c3c1c1",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "8441e4f9726841d1",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.30.0",
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    }
+]

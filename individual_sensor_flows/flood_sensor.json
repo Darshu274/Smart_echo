@@ -1,0 +1,1228 @@
+[
+    {
+        "id": "30217c7e733b94c0",
+        "type": "tab",
+        "label": "Leak Sensor",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6c646dbc7e9ae21a",
+        "type": "inject",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 140,
+        "wires": [
+            [
+                "89dff3c7d5bc8ba7"
+            ]
+        ]
+    },
+    {
+        "id": "89dff3c7d5bc8ba7",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "login payload",
+        "func": "msg.headers = {\"Content-Type\":\"application/json\"};\nmsg.payload = { login: \"admin\", password: \"654321\" };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "ede8a15bc477d4d7"
+            ]
+        ]
+    },
+    {
+        "id": "ede8a15bc477d4d7",
+        "type": "http request",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/login",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 140,
+        "wires": [
+            [
+                "36ae02dbe283e588"
+            ]
+        ]
+    },
+    {
+        "id": "36ae02dbe283e588",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "store sid",
+        "func": "// Try JSON sid first\nlet sid = msg.payload?.data?.sid;\n\n// If not present, try Set-Cookie header\nif (!sid) {\n  const setCookie = msg.headers?.['set-cookie'] || msg.headers?.['Set-Cookie'];\n  // set-cookie may be an array\n  const cookies = Array.isArray(setCookie) ? setCookie : [setCookie].filter(Boolean);\n\n  for (const c of cookies) {\n    const m = String(c).match(/ZWAYSession=([^;]+)/);\n    if (m) { sid = m[1]; break; }\n  }\n}\n\nif (!sid) {\n  node.error(\"Login response did not include sid or ZWAYSession cookie.\", {\n    payload: msg.payload,\n    headers: msg.headers\n  });\n  return null;\n}\n\nglobal.set(\"zway_sid\", sid);\nnode.warn(\"SID stored successfully\");\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4ee8f407039de368",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "vDev ID - funtcion",
+        "func": "const devices = msg.payload?.data?.devices || [];\nconst byId = new Map(devices.map(d => [String(d.id), d]));\n\nfunction toNum(x) {\n  const m = String(x ?? \"\").replace(\",\", \".\").match(/-?\\d+(\\.\\d+)?/);\n  return m ? Number(m[0]) : null;\n}\n\nfunction to01(x) {\n  const s = String(x ?? \"\").toLowerCase();\n  if (s === \"on\" || s === \"true\" || s === \"1\") return 1;\n  if (s === \"off\" || s === \"false\" || s === \"0\") return 0;\n  const n = toNum(x);\n  return Number.isFinite(n) ? (n ? 1 : 0) : null;\n}\n\n// Leak sensor (Node 18) vDev IDs\nconst leakTemp      = toNum(byId.get(\"ZWayVDev_zway_18-0-49-1\")?.metrics?.level);      // °C\nconst leakWater     = to01(byId.get(\"ZWayVDev_zway_18-0-113-5-2-A\")?.metrics?.level);  // on/off\nconst leakTamper    = to01(byId.get(\"ZWayVDev_zway_18-0-113-7-3-A\")?.metrics?.level);  // on/off\nconst leakBattery   = toNum(byId.get(\"ZWayVDev_zway_18-0-128\")?.metrics?.level);       // %\nconst leakGenAlarm  = to01(byId.get(\"ZWayVDev_zway_18-0-156-0-A\")?.metrics?.level);    // on/off\nconst leakWaterAlm  = to01(byId.get(\"ZWayVDev_zway_18-0-156-5-A\")?.metrics?.level);    // on/off\n\nmsg.payload = {\n  leakTemp,\n  leakWater,\n  leakTamper,\n  leakBattery,\n  leakGenAlarm,\n  leakWaterAlm,\n  ts: Date.now()\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 400,
+        "wires": [
+            [
+                "d218ab2340cef028"
+            ]
+        ]
+    },
+    {
+        "id": "d218ab2340cef028",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "Make UI Messages",
+        "func": "const p = msg.payload;\n\nconst msgs = [\n  { topic: \"leak.temp\",        payload: p.leakTemp },\n  { topic: \"leak.water\",       payload: p.leakWater },\n  { topic: \"leak.tamper\",      payload: p.leakTamper },\n  { topic: \"leak.battery\",     payload: p.leakBattery },\n  { topic: \"leak.generalAlarm\",payload: p.leakGenAlarm },\n  { topic: \"leak.waterAlarm\",  payload: p.leakWaterAlm }\n];\n\nreturn [msgs]; // IMPORTANT\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 400,
+        "wires": [
+            [
+                "fd29420b657ad81c"
+            ]
+        ]
+    },
+    {
+        "id": "fa692115c160e1bc",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "bc37e19755b1a675"
+            ]
+        ]
+    },
+    {
+        "id": "bc37e19755b1a675",
+        "type": "http request",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 400,
+        "wires": [
+            [
+                "4ee8f407039de368"
+            ]
+        ]
+    },
+    {
+        "id": "fd29420b657ad81c",
+        "type": "switch",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "leak.temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "leak.water",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "leak.tamper",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "leak.battery",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "leak.generalAlarm",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "leak.waterAlarm",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 6,
+        "x": 1170,
+        "y": 620,
+        "wires": [
+            [
+                "6cf74992be8debfa",
+                "682e79778ecdd21e"
+            ],
+            [
+                "54bfe25c8717394f",
+                "df4237fa8233f223",
+                "afc9fed3461b518b",
+                "8e301b63cdf4caec"
+            ],
+            [
+                "8cb8aec9cb6e49c4",
+                "75ea7d035da6b97f"
+            ],
+            [
+                "2334e1245520cb09"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "6cf74992be8debfa",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1430,
+        "y": 320,
+        "wires": [
+            [
+                "ad4093dd90138dda"
+            ]
+        ]
+    },
+    {
+        "id": "54bfe25c8717394f",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"Water is Leaking\" : \"No Water Leakage\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 360,
+        "wires": [
+            [
+                "766ac7cb7ab83a78"
+            ]
+        ]
+    },
+    {
+        "id": "ad4093dd90138dda",
+        "type": "ui-chart",
+        "z": "30217c7e733b94c0",
+        "group": "b1d4dcdf5d18c14e",
+        "name": "Temperature",
+        "label": "Temperature",
+        "order": 3,
+        "chartType": "area",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": true,
+        "removeOlder": "5",
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": "4",
+        "className": "",
+        "interpolation": "linear",
+        "x": 1650,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "766ac7cb7ab83a78",
+        "type": "ui-text",
+        "z": "30217c7e733b94c0",
+        "group": "b1d4dcdf5d18c14e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Water Leakage",
+        "label": "Water Leakage Status :",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#053b4d",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1660,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "7e9a7078270bd915",
+        "type": "ui-notification",
+        "z": "30217c7e733b94c0",
+        "ui": "a5694dd5abd38f3c",
+        "position": "top center",
+        "colorDefault": false,
+        "color": "#06bcf9",
+        "displayTime": "6",
+        "showCountdown": false,
+        "outputs": 1,
+        "allowDismiss": false,
+        "dismissText": "Close",
+        "allowConfirm": false,
+        "confirmText": "Confirm",
+        "raw": false,
+        "className": "",
+        "name": "Leakage Alarm",
+        "x": 1820,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2334e1245520cb09",
+        "type": "ui-gauge",
+        "z": "30217c7e733b94c0",
+        "name": "Battery",
+        "group": "b1d4dcdf5d18c14e",
+        "order": 4,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "6",
+        "height": "2",
+        "gtype": "gauge-battery",
+        "gstyle": "needle",
+        "title": "Battery",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "40",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "70",
+                "color": "#25c125",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1560,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8cb8aec9cb6e49c4",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"Tampered\" : \"Stable\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 400,
+        "wires": [
+            [
+                "d0efea865e15a11c"
+            ]
+        ]
+    },
+    {
+        "id": "d0efea865e15a11c",
+        "type": "ui-text",
+        "z": "30217c7e733b94c0",
+        "group": "b1d4dcdf5d18c14e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Water Tamper",
+        "label": "Leak Tamper :",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#034a54",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1660,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "c4eb700f8617e6f7",
+        "type": "inject",
+        "z": "30217c7e733b94c0",
+        "name": "Start influxDB Move",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 400,
+        "wires": [
+            [
+                "fa692115c160e1bc"
+            ]
+        ]
+    },
+    {
+        "id": "682e79778ecdd21e",
+        "type": "change",
+        "z": "30217c7e733b94c0",
+        "name": "Temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "leak.temp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1590,
+        "y": 680,
+        "wires": [
+            [
+                "8ab67d7314137c04"
+            ]
+        ]
+    },
+    {
+        "id": "df4237fa8233f223",
+        "type": "change",
+        "z": "30217c7e733b94c0",
+        "name": "Water Leakage",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "leak.water",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1620,
+        "y": 720,
+        "wires": [
+            [
+                "8ab67d7314137c04"
+            ]
+        ]
+    },
+    {
+        "id": "75ea7d035da6b97f",
+        "type": "change",
+        "z": "30217c7e733b94c0",
+        "name": "water tamper",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "leak.tamper",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1610,
+        "y": 760,
+        "wires": [
+            [
+                "8ab67d7314137c04"
+            ]
+        ]
+    },
+    {
+        "id": "bab8be364e6d99e2",
+        "type": "influxdb out",
+        "z": "30217c7e733b94c0",
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "smart_echo Bucket",
+        "measurement": "leak",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Rgroup",
+        "bucket": "smart_echo",
+        "x": 2330,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "8ab67d7314137c04",
+        "type": "join",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "2",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1830,
+        "y": 720,
+        "wires": [
+            [
+                "15cdd320cc12be8a"
+            ]
+        ]
+    },
+    {
+        "id": "15cdd320cc12be8a",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "function 4",
+        "func": "const p = msg.payload || {};\n\nfunction toFloat(v) {\n  const n = Number(v);\n  return Number.isFinite(n) ? n : null;\n}\n\nfunction waterToInt(v) {\n  const s = String(v).toLowerCase();\n  if (s.includes(\"no water\")) return 0;\n  if (s.includes(\"water\")) return 1;\n  const n = Number(v);\n  if (Number.isFinite(n)) return n ? 1 : 0;\n  return null;\n}\n\nfunction tamperToInt(v) {\n  const s = String(v).toLowerCase();\n  if (s.includes(\"stable\") || s.includes(\"ok\") || s.includes(\"no\")) return 0;\n  if (s.includes(\"tamper\") || s.includes(\"alarm\") || s.includes(\"trigger\")) return 1;\n  const n = Number(v);\n  if (Number.isFinite(n)) return n ? 1 : 0;\n  return null;\n}\n\nconst temp   = toFloat(p[\"leak.temp\"]);\nconst water  = waterToInt(p[\"leak.water\"]);\nconst tamper = tamperToInt(p[\"leak.tamper\"]);\n\nif (temp === null || water === null || tamper === null) return null;\n\nmsg.payload = [\n  { leak_temp: temp, leak_water: water, leak_tamper: tamper },\n  { device: \"leak\", source: \"zway\" }\n];\n\nmsg.measurement = \"leak\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2060,
+        "y": 720,
+        "wires": [
+            [
+                "bab8be364e6d99e2"
+            ]
+        ]
+    },
+    {
+        "id": "afc9fed3461b518b",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "leak function notification",
+        "func": "// Output 1: ui-table (add ONE row)\n// Output 2: ui-notification (toast)\n// Trigger only when leak changes 0 -> 1\n\nlet leakVal = null;\n\n// case 1: topic/value\nif (msg.topic === \"leak.water\") leakVal = Number(msg.payload);\n\n// case 2: joined object\nif (msg.payload && typeof msg.payload === \"object\" && msg.payload[\"leak.water\"] !== undefined) {\n    leakVal = Number(msg.payload[\"leak.water\"]);\n}\n\nif (leakVal === null || Number.isNaN(leakVal)) return null;\n\n// edge detect\nconst last = flow.get(\"leak_last_state\");\nflow.set(\"leak_last_state\", leakVal);\n\n// Only on rising edge\nif (!((last === 0 || last === undefined) && leakVal === 1)) return null;\n\nconst row = {\n    time: new Date().toLocaleString(),\n    source: \"Leak Sensor\",\n    severity: \"ALERT\",\n    message: \"🚨 Water is leaking! Please check the tap.\"\n};\n\n// ✅ send ONLY the new row to table (prevents duplicates)\nconst tableMsg = { payload: [row] };\n\n// ✅ toast must be a string (prevents vertical list)\nconst toastMsg = { payload: row.message };\n\nreturn [tableMsg, toastMsg];\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1670,
+        "y": 460,
+        "wires": [
+            [
+                "6e84d7427ab3f490"
+            ]
+        ]
+    },
+    {
+        "id": "8e301b63cdf4caec",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "function 8",
+        "func": "// Send popup notification when leak.water == 1\n\nlet isLeak = false;\n\n// If msg.topic carries the sensor name and msg.payload is 0/1\nif (msg.topic === \"leak.water\" && Number(msg.payload) === 1) {\n    isLeak = true;\n}\n\n// If msg.payload is an object that contains leak.water\nif (msg.payload && typeof msg.payload === \"object\" && Number(msg.payload[\"leak.water\"]) === 1) {\n    isLeak = true;\n}\n\nif (!isLeak) return null;\n\n// Message for popup notification\nmsg.payload = \"🚨 Water is leaking! Please check the tap.\";\n// optional (some notification nodes support it)\nmsg.topic = \"Leak Alert\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1640,
+        "y": 560,
+        "wires": [
+            [
+                "7e9a7078270bd915"
+            ]
+        ]
+    },
+    {
+        "id": "6e84d7427ab3f490",
+        "type": "ui-table",
+        "z": "30217c7e733b94c0",
+        "group": "9e1cc986f772b04a",
+        "name": "",
+        "label": "",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "maxrows": 0,
+        "passthru": false,
+        "autocols": true,
+        "showSearch": false,
+        "deselect": true,
+        "selectionType": "none",
+        "columns": [],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "append",
+        "className": "",
+        "x": 1950,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2070ab78a02e6858",
+        "type": "http in",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "http in",
+        "url": "/export/leak",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 350,
+        "y": 1080,
+        "wires": [
+            [
+                "381c04e5e53d9e4e"
+            ]
+        ]
+    },
+    {
+        "id": "381c04e5e53d9e4e",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "set days",
+        "func": "msg.days = Math.max(1, Math.min(365, Number(msg.req.query.days || 7)));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 1080,
+        "wires": [
+            [
+                "3c11a7916d50048b"
+            ]
+        ]
+    },
+    {
+        "id": "3c11a7916d50048b",
+        "type": "influxdb in",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "InfluxBD ",
+        "query": "from(bucket: \"smart_echo\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"leak\")\n  |> filter(fn: (r) =>\n    r[\"_field\"] == \"leak_temp\" or\n    r[\"_field\"] == \"leak_water\" or\n    r[\"_field\"] == \"leak_tamper\"\n  )\n  |> keep(columns: [\"_time\",\"_field\",\"_value\",\"device\",\"source\"])\n  |> sort(columns: [\"_time\"])\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "Rgroup",
+        "x": 780,
+        "y": 1080,
+        "wires": [
+            [
+                "5e0215c7f61d2f16"
+            ]
+        ]
+    },
+    {
+        "id": "5e0215c7f61d2f16",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "download + csv",
+        "func": "\nconst rows = Array.isArray(msg.payload) ? msg.payload : [];\n\nmsg.payload = rows.map(r => ({\n  time: r._time || r.time || \"\",\n  field: r._field || r.field || \"\",\n  value: (r._value !== undefined) ? r._value : (r.value ?? \"\"),\n  device: r.device || \"\",\n  source: r.source || \"\"\n}));\n\nconst days = msg.days || 7;\nmsg.headers = {\n  \"Content-Type\": \"text/csv; charset=utf-8\",\n  \"Content-Disposition\": `attachment; filename=\"leak_${days}d.csv\"`\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 1200,
+        "wires": [
+            [
+                "1d3533d1a7f6336f",
+                "3ddff58146ecf28c"
+            ]
+        ]
+    },
+    {
+        "id": "1d3533d1a7f6336f",
+        "type": "csv",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "all",
+        "multi": "mult",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 1250,
+        "y": 1200,
+        "wires": [
+            [
+                "c3356def3865a01f"
+            ]
+        ]
+    },
+    {
+        "id": "3ddff58146ecf28c",
+        "type": "debug",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "c3356def3865a01f",
+        "type": "http response",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "fe8aa4a138eaa35a",
+        "type": "http in",
+        "z": "30217c7e733b94c0",
+        "name": "http in",
+        "url": "/export/all",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 830,
+        "y": 1700,
+        "wires": [
+            [
+                "a112d07cd7e766d4"
+            ]
+        ]
+    },
+    {
+        "id": "5ab32d87c21c5c04",
+        "type": "influxdb in",
+        "z": "30217c7e733b94c0",
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "InfluxBD ",
+        "query": "from(bucket: \"smart_echo\")\n  |> range(start: today())\n  |> filter(fn: (r) =>\n    r._measurement == \"air_quality\" or\n    r._measurement == \"leak\" or\n    r._measurement == \"plug\" or\n    r._measurement == \"smoke\" or\n    r._measurement == \"vibration\"\n  )\n  |> filter(fn: (r) =>\n    r._field == \"co2\" or r._field == \"dewPoint\" or r._field == \"humidity\" or r._field == \"temperature\" or r._field == \"voc\" or\n    r._field == \"leak_tamper\" or r._field == \"leak_temp\" or r._field == \"leak_water\" or\n    r._field == \"plug_energy\" or r._field == \"plug_overCurrent\" or r._field == \"plug_overLoad\" or r._field == \"plug_power\" or\n    r._field == \"smoke_tamper\" or r._field == \"smoke_temp\" or\n    r._field == \"vib_temp\" or r._field == \"vib_tamper\" or r._field == \"vib_seismic\" or r._field == \"vib_lux\" or\n    r._field == \"vib_az\" or r._field == \"vib_ay\" or r._field == \"vib_ax\" or r._field == \"vib_alarm\"\n  )\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> map(fn: (r) => ({ r with _field: r._field + \"_\" + r._measurement }))\n  |> group(columns: [])\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> rename(columns: {_time: \"timestamp\"})\n  |> keep(columns: [\n      \"timestamp\",\n      \"co2_air_quality\", \"dewPoint_air_quality\", \"humidity_air_quality\", \"temperature_air_quality\", \"voc_air_quality\",\n      \"leak_tamper_leak\", \"leak_temp_leak\", \"leak_water_leak\",\n      \"plug_energy_plug\", \"plug_overCurrent_plug\", \"plug_overLoad_plug\", \"plug_power_plug\",\n      \"smoke_tamper_smoke\", \"smoke_temp_smoke\",\n      \"vib_temp_vibration\", \"vib_tamper_vibration\", \"vib_seismic_vibration\", \"vib_lux_vibration\",\n      \"vib_az_vibration\", \"vib_ay_vibration\", \"vib_ax_vibration\", \"vib_alarm_vibration\"\n  ])\n  |> sort(columns: [\"timestamp\"])\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "Rgroup",
+        "x": 1160,
+        "y": 1700,
+        "wires": [
+            [
+                "de930b9a210ab082"
+            ]
+        ]
+    },
+    {
+        "id": "de930b9a210ab082",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "download + csv",
+        "func": "// msg.payload should already be an array of objects from the influx query\nmsg.headers = {\n  \"Content-Type\": \"text/csv; charset=utf-8\",\n  \"Content-Disposition\": 'attachment; filename=\"all_sensors_today.csv\"'\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 1700,
+        "wires": [
+            [
+                "5283d3af4b648004"
+            ]
+        ]
+    },
+    {
+        "id": "5283d3af4b648004",
+        "type": "csv",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "all",
+        "multi": "mult",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 1550,
+        "y": 1700,
+        "wires": [
+            [
+                "afdbfbd4601c2497"
+            ]
+        ]
+    },
+    {
+        "id": "afdbfbd4601c2497",
+        "type": "http response",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1730,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "c80923c3f390ccdc",
+        "type": "ui-template",
+        "z": "30217c7e733b94c0",
+        "group": "0bc1973ac5e7e081",
+        "page": "",
+        "ui": "",
+        "name": "Downlad All sensor Data",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "head": "",
+        "format": "<button id=\"dlbtn\"\n  style=\"padding:10px 16px; border-radius:8px; border:0; cursor:pointer; font-weight:600;\">\n  ⬇ Download All Sensor Data (Today)\n</button>\n\n<script>\n  document.getElementById(\"dlbtn\").onclick = function () {\n    const url = window.location.origin + \"/export/all\";\n    window.location.href = url;  // avoids popup blockers\n  };\n</script>\n",
+        "storeOutMessages": true,
+        "passthru": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1750,
+        "y": 1780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a112d07cd7e766d4",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "set days",
+        "func": "msg.days = Math.max(1, Math.min(365, Number(msg.req.query.days || 1)));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 1700,
+        "wires": [
+            [
+                "5ab32d87c21c5c04"
+            ]
+        ]
+    },
+    {
+        "id": "b1d4dcdf5d18c14e",
+        "type": "ui-group",
+        "name": "Leak Sensor",
+        "page": "351b470c1755e821",
+        "width": 6,
+        "height": 1,
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "a5694dd5abd38f3c",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "notifications",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "6c9ec3115d61e7d3",
+        "type": "influxdb",
+        "hostname": "localhost",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "9e1cc986f772b04a",
+        "type": "ui-group",
+        "name": "Notification Log",
+        "page": "ec9922040277583a",
+        "width": "12",
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "0bc1973ac5e7e081",
+        "type": "ui-group",
+        "name": "Download Data",
+        "page": "8d24c2c67451d9b2",
+        "width": "12",
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "351b470c1755e821",
+        "type": "ui-page",
+        "name": "SmartEcho",
+        "ui": "a5694dd5abd38f3c",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c4f6fa946f29d2bb",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "ec9922040277583a",
+        "type": "ui-page",
+        "name": "Notifications",
+        "ui": "a5694dd5abd38f3c",
+        "path": "/page2",
+        "icon": "notifications",
+        "layout": "grid",
+        "theme": "c4f6fa946f29d2bb",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "8d24c2c67451d9b2",
+        "type": "ui-page",
+        "name": "Download Data",
+        "ui": "a5694dd5abd38f3c",
+        "path": "/page3",
+        "icon": "Download",
+        "layout": "grid",
+        "theme": "c4f6fa946f29d2bb",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 3,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "c4f6fa946f29d2bb",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#92aaab",
+            "primary": "#73a0a5",
+            "bgPage": "#c3c1c1",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "af3154b72bf82ebd",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.30.0",
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    }
+]
