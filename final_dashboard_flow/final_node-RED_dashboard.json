@@ -1,0 +1,5104 @@
+[
+    {
+        "id": "551a1ce9fa52ece8",
+        "type": "tab",
+        "label": "Air Quality",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "30217c7e733b94c0",
+        "type": "tab",
+        "label": "Leak Sensor",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "505946dca9cb35ba",
+        "type": "tab",
+        "label": "smoke",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f24a94f20292b0a2",
+        "type": "tab",
+        "label": "Motion Sensor",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e77b158f9548e1ec",
+        "type": "tab",
+        "label": "Plug",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a5694dd5abd38f3c",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "notifications",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "c4f6fa946f29d2bb",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#92aaab",
+            "primary": "#73a0a5",
+            "bgPage": "#c3c1c1",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "351b470c1755e821",
+        "type": "ui-page",
+        "name": "SmartEcho",
+        "ui": "a5694dd5abd38f3c",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c4f6fa946f29d2bb",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "9fe4bb7030298660",
+        "type": "ui-group",
+        "name": "Qaulity Of Air In The Room",
+        "page": "351b470c1755e821",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ad0a25ddcf4b6825",
+        "type": "ui-group",
+        "name": "Smoke Sensor",
+        "page": "351b470c1755e821",
+        "width": 6,
+        "height": 1,
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "b1d4dcdf5d18c14e",
+        "type": "ui-group",
+        "name": "Leak Sensor",
+        "page": "351b470c1755e821",
+        "width": 6,
+        "height": 1,
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "f51783401afac088",
+        "type": "ui-group",
+        "name": "Smart Plug",
+        "page": "351b470c1755e821",
+        "width": 6,
+        "height": 1,
+        "order": 5,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "e0da172c67cd5e98",
+        "type": "ui-group",
+        "name": "Motion Sensor",
+        "page": "351b470c1755e821",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ec9922040277583a",
+        "type": "ui-page",
+        "name": "Notifications",
+        "ui": "a5694dd5abd38f3c",
+        "path": "/page2",
+        "icon": "notifications",
+        "layout": "grid",
+        "theme": "c4f6fa946f29d2bb",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "6c9ec3115d61e7d3",
+        "type": "influxdb",
+        "hostname": "localhost",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "9e1cc986f772b04a",
+        "type": "ui-group",
+        "name": "Notification Log",
+        "page": "ec9922040277583a",
+        "width": "12",
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "8d24c2c67451d9b2",
+        "type": "ui-page",
+        "name": "Download Data",
+        "ui": "a5694dd5abd38f3c",
+        "path": "/page3",
+        "icon": "Download",
+        "layout": "grid",
+        "theme": "c4f6fa946f29d2bb",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 3,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "0bc1973ac5e7e081",
+        "type": "ui-group",
+        "name": "Download Data",
+        "page": "8d24c2c67451d9b2",
+        "width": "12",
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ab2211fdaf26c15b",
+        "type": "inject",
+        "z": "551a1ce9fa52ece8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "83cd9e01f4701610"
+            ]
+        ]
+    },
+    {
+        "id": "83cd9e01f4701610",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "login payload",
+        "func": "msg.headers = {\"Content-Type\":\"application/json\"};\nmsg.payload = { login: \"admin\", password: \"654321\" };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 60,
+        "wires": [
+            [
+                "3bb376d79493747f"
+            ]
+        ]
+    },
+    {
+        "id": "3bb376d79493747f",
+        "type": "http request",
+        "z": "551a1ce9fa52ece8",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/login",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 60,
+        "wires": [
+            [
+                "216b3fab28a4ec10"
+            ]
+        ]
+    },
+    {
+        "id": "216b3fab28a4ec10",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "store sid",
+        "func": "// Try JSON sid first\nlet sid = msg.payload?.data?.sid;\n\n// If not present, try Set-Cookie header\nif (!sid) {\n  const setCookie = msg.headers?.['set-cookie'] || msg.headers?.['Set-Cookie'];\n  // set-cookie may be an array\n  const cookies = Array.isArray(setCookie) ? setCookie : [setCookie].filter(Boolean);\n\n  for (const c of cookies) {\n    const m = String(c).match(/ZWAYSession=([^;]+)/);\n    if (m) { sid = m[1]; break; }\n  }\n}\n\nif (!sid) {\n  node.error(\"Login response did not include sid or ZWAYSession cookie.\", {\n    payload: msg.payload,\n    headers: msg.headers\n  });\n  return null;\n}\n\nglobal.set(\"zway_sid\", sid);\nnode.warn(\"SID stored successfully\");\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a19770858ae4bc2e",
+        "type": "debug",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "98c2e12d54eb393f",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "Find node vDevs",
+        "func": "const NODE = 16; // change to your smoke node / plug node / leak node / vibration node\nconst devices = msg.payload?.data?.devices || [];\n\nconst hits = devices\n  .filter(d => String(d.id).includes(`zway_${NODE}-`))\n  .map(d => ({\n    id: d.id,\n    title: d.metrics?.title,\n    probeTitle: d.metrics?.probeTitle,\n    level: d.metrics?.level,\n    unit: d.metrics?.scaleTitle || d.metrics?.unit || \"\"\n  }));\n\nmsg.payload = hits;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 780,
+        "wires": [
+            [
+                "a19770858ae4bc2e"
+            ]
+        ]
+    },
+    {
+        "id": "61172f7c593266ce",
+        "type": "inject",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 780,
+        "wires": [
+            [
+                "67f89c8690c38119"
+            ]
+        ]
+    },
+    {
+        "id": "67f89c8690c38119",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 780,
+        "wires": [
+            [
+                "da9c3fcc91417bd5"
+            ]
+        ]
+    },
+    {
+        "id": "da9c3fcc91417bd5",
+        "type": "http request",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 550,
+        "y": 780,
+        "wires": [
+            [
+                "98c2e12d54eb393f"
+            ]
+        ]
+    },
+    {
+        "id": "5d0b9ae394684ada",
+        "type": "inject",
+        "z": "551a1ce9fa52ece8",
+        "name": "Start influxDB Move",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "2ec76b1acc8bd837"
+            ]
+        ]
+    },
+    {
+        "id": "2ec76b1acc8bd837",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "d46b77e3c8ea1481"
+            ]
+        ]
+    },
+    {
+        "id": "d46b77e3c8ea1481",
+        "type": "http request",
+        "z": "551a1ce9fa52ece8",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 590,
+        "y": 320,
+        "wires": [
+            [
+                "9aa287e14168e529"
+            ]
+        ]
+    },
+    {
+        "id": "9aa287e14168e529",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "vDev ID - funtcion",
+        "func": "\nconst devices = msg.payload?.data?.devices || [];\nconst byId = new Map(devices.map(d => [String(d.id), d]));\n\nfunction toNum(x) {\n    const m = String(x ?? \"\").replace(\",\", \".\").match(/-?\\d+(\\.\\d+)?/);\n    return m ? Number(m[0]) : null;\n}\n\n// Your confirmed vDev IDs\nconst T = toNum(byId.get(\"ZWayVDev_zway_20-0-49-1\")?.metrics?.level);   // °C\nconst RH = toNum(byId.get(\"ZWayVDev_zway_20-0-49-5\")?.metrics?.level);   // %\nconst DP = toNum(byId.get(\"ZWayVDev_zway_20-0-49-11\")?.metrics?.level);  // °C (already provided!)\nconst CO2 = toNum(byId.get(\"ZWayVDev_zway_20-0-49-17\")?.metrics?.level);  // ppm\nconst VOC = toNum(byId.get(\"ZWayVDev_zway_20-0-49-39\")?.metrics?.level);  // (unit unknown)\n\n// Optional VOC alarm (on/off)\nconst vocAlarmRaw = byId.get(\"ZWayVDev_zway_20-0-113-13-6-A\")?.metrics?.level;\nconst vocAlarm = (String(vocAlarmRaw).toLowerCase() === \"on\") ? 1 : 0;\n\nmsg.payload = {\n    temperature: T,\n    humidity: RH,\n    dewPoint: DP,\n    co2: CO2,\n    voc: VOC,\n    vocAlarm: vocAlarm,\n    ts: Date.now()\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 320,
+        "wires": [
+            [
+                "15b2442a0c449315"
+            ]
+        ]
+    },
+    {
+        "id": "453eb2f158a5cf6e",
+        "type": "ui-gauge",
+        "z": "551a1ce9fa52ece8",
+        "d": true,
+        "name": "Temperature (°C)",
+        "group": "9fe4bb7030298660",
+        "order": 3,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperature (°C)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-10",
+                "color": "#5cd6d4",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "30",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "60",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "value"
+            }
+        ],
+        "min": "-10",
+        "max": "60",
+        "sizeThickness": "20",
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1450,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8915da623cdc99e2",
+        "type": "ui-gauge",
+        "z": "551a1ce9fa52ece8",
+        "name": "Humidity (%)",
+        "group": "9fe4bb7030298660",
+        "order": 2,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Humidity (%)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "20",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "40",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "80",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "value"
+            }
+        ],
+        "min": "20",
+        "max": "100",
+        "sizeThickness": "16",
+        "sizeGap": 4,
+        "sizeKeyThickness": "9",
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1450,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ab97741af5cde2c0",
+        "type": "ui-gauge",
+        "z": "551a1ce9fa52ece8",
+        "name": "Dew point (°C)",
+        "group": "9fe4bb7030298660",
+        "order": 4,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Dew point (°C)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-10",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "1",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "20",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "-10",
+        "max": "30",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1460,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b151f2759c8a6e8",
+        "type": "ui-text",
+        "z": "551a1ce9fa52ece8",
+        "group": "9fe4bb7030298660",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "VOC Alarm",
+        "label": "VOC Alarm :   ",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Palatino Linotype,Palatino,Book Antiqua,serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1410,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "15b2442a0c449315",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "Make UI Messages",
+        "func": "const p = msg.payload;\n\nconst msgs = [\n  { topic: \"temperature\", payload: p.temperature },\n  { topic: \"humidity\",    payload: p.humidity },\n  { topic: \"dewPoint\",    payload: p.dewPoint },\n  { topic: \"co2\",         payload: p.co2 },\n  { topic: \"voc\",         payload: p.voc },\n  { topic: \"vocAlarm\",    payload: p.vocAlarm }\n];\n\n// IMPORTANT: wrap msgs in an array because the function node has 1 output\nreturn [msgs];\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 460,
+        "wires": [
+            [
+                "a59ce3cf5381017b"
+            ]
+        ]
+    },
+    {
+        "id": "a59ce3cf5381017b",
+        "type": "switch",
+        "z": "551a1ce9fa52ece8",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "temperature",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "humidity",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "dewPoint",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "co2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "voc",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vocAlarm",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 6,
+        "x": 1050,
+        "y": 260,
+        "wires": [
+            [
+                "453eb2f158a5cf6e",
+                "cd8a920edfc2efb7",
+                "5392005f88844d05"
+            ],
+            [
+                "8915da623cdc99e2",
+                "4de06fe208da7bc3"
+            ],
+            [
+                "ab97741af5cde2c0",
+                "df520360626479b9"
+            ],
+            [
+                "d33dd347a777ce2b",
+                "eff0831a346789da"
+            ],
+            [
+                "5e4939ba818dbcd1"
+            ],
+            [
+                "c6d43753af2d39bb"
+            ]
+        ]
+    },
+    {
+        "id": "c6d43753af2d39bb",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "converter",
+        "func": "msg.payload = msg.payload === 1 ? \"ON\" : \"OFF\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1240,
+        "y": 580,
+        "wires": [
+            [
+                "5b151f2759c8a6e8"
+            ]
+        ]
+    },
+    {
+        "id": "d33dd347a777ce2b",
+        "type": "ui-chart",
+        "z": "551a1ce9fa52ece8",
+        "group": "9fe4bb7030298660",
+        "name": "CO2 trend",
+        "label": "chart",
+        "order": 6,
+        "chartType": "area",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": true,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": true,
+        "removeOlder": "5",
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#f00f0f"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#d81313"
+        ],
+        "gridColorDefault": true,
+        "width": "6",
+        "height": "4",
+        "className": "",
+        "interpolation": "step",
+        "x": 1450,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cd8a920edfc2efb7",
+        "type": "change",
+        "z": "551a1ce9fa52ece8",
+        "name": "Temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "temperature",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 360,
+        "wires": [
+            [
+                "c5c5efd031c7a333"
+            ]
+        ]
+    },
+    {
+        "id": "4de06fe208da7bc3",
+        "type": "change",
+        "z": "551a1ce9fa52ece8",
+        "name": "humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "humidity",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1500,
+        "y": 400,
+        "wires": [
+            [
+                "c5c5efd031c7a333"
+            ]
+        ]
+    },
+    {
+        "id": "df520360626479b9",
+        "type": "change",
+        "z": "551a1ce9fa52ece8",
+        "name": "Dew",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "dewPoint",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 440,
+        "wires": [
+            [
+                "c5c5efd031c7a333"
+            ]
+        ]
+    },
+    {
+        "id": "eff0831a346789da",
+        "type": "change",
+        "z": "551a1ce9fa52ece8",
+        "name": "Co2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "co2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 480,
+        "wires": [
+            [
+                "c5c5efd031c7a333"
+            ]
+        ]
+    },
+    {
+        "id": "5e4939ba818dbcd1",
+        "type": "change",
+        "z": "551a1ce9fa52ece8",
+        "name": "VoC",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "voc",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 520,
+        "wires": [
+            [
+                "c5c5efd031c7a333"
+            ]
+        ]
+    },
+    {
+        "id": "c5c5efd031c7a333",
+        "type": "join",
+        "z": "551a1ce9fa52ece8",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "2",
+        "count": "5",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1670,
+        "y": 440,
+        "wires": [
+            [
+                "6f8846a644973901"
+            ]
+        ]
+    },
+    {
+        "id": "6f8846a644973901",
+        "type": "function",
+        "z": "551a1ce9fa52ece8",
+        "name": "function 1",
+        "func": "function num(v) {\n  const n = Number(v);\n  return Number.isFinite(n) ? n : null;\n}\n\nconst p = msg.payload || {};\n\n// Fields = what you store in Influx\nconst fields = {\n  temperature: num(p.temperature),\n  humidity: num(p.humidity),\n  dewPoint: num(p.dewPoint),\n  co2: num(p.co2),\n  voc: num(p.voc)\n};\n\n// If any value missing, don't write\nif (Object.values(fields).some(v => v === null)) return null;\n\n// Tags (optional)\nconst tags = {\n  device: \"air_quality\",\n  source: \"zway\"\n};\n\n// Format for influxdb out node (InfluxDB 2.x node-red-contrib-influxdb)\nmsg.payload = [fields, tags];\nmsg.measurement = \"air_quality\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 440,
+        "wires": [
+            [
+                "872d66e366a365b4"
+            ]
+        ]
+    },
+    {
+        "id": "872d66e366a365b4",
+        "type": "influxdb out",
+        "z": "551a1ce9fa52ece8",
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "smart_echo Bucket",
+        "measurement": "air_quality",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Rgroup",
+        "bucket": "smart_echo",
+        "x": 2070,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "5392005f88844d05",
+        "type": "ui-chart",
+        "z": "551a1ce9fa52ece8",
+        "group": "9fe4bb7030298660",
+        "name": "",
+        "label": "Temperature",
+        "order": 5,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": true,
+        "removeOlder": "5",
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#fd7a08",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "6",
+        "height": "4",
+        "className": "",
+        "interpolation": "linear",
+        "x": 1430,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c646dbc7e9ae21a",
+        "type": "inject",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 140,
+        "wires": [
+            [
+                "89dff3c7d5bc8ba7"
+            ]
+        ]
+    },
+    {
+        "id": "89dff3c7d5bc8ba7",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "login payload",
+        "func": "msg.headers = {\"Content-Type\":\"application/json\"};\nmsg.payload = { login: \"admin\", password: \"654321\" };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "ede8a15bc477d4d7"
+            ]
+        ]
+    },
+    {
+        "id": "ede8a15bc477d4d7",
+        "type": "http request",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/login",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 140,
+        "wires": [
+            [
+                "36ae02dbe283e588"
+            ]
+        ]
+    },
+    {
+        "id": "36ae02dbe283e588",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "store sid",
+        "func": "// Try JSON sid first\nlet sid = msg.payload?.data?.sid;\n\n// If not present, try Set-Cookie header\nif (!sid) {\n  const setCookie = msg.headers?.['set-cookie'] || msg.headers?.['Set-Cookie'];\n  // set-cookie may be an array\n  const cookies = Array.isArray(setCookie) ? setCookie : [setCookie].filter(Boolean);\n\n  for (const c of cookies) {\n    const m = String(c).match(/ZWAYSession=([^;]+)/);\n    if (m) { sid = m[1]; break; }\n  }\n}\n\nif (!sid) {\n  node.error(\"Login response did not include sid or ZWAYSession cookie.\", {\n    payload: msg.payload,\n    headers: msg.headers\n  });\n  return null;\n}\n\nglobal.set(\"zway_sid\", sid);\nnode.warn(\"SID stored successfully\");\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4ee8f407039de368",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "vDev ID - funtcion",
+        "func": "const devices = msg.payload?.data?.devices || [];\nconst byId = new Map(devices.map(d => [String(d.id), d]));\n\nfunction toNum(x) {\n  const m = String(x ?? \"\").replace(\",\", \".\").match(/-?\\d+(\\.\\d+)?/);\n  return m ? Number(m[0]) : null;\n}\n\nfunction to01(x) {\n  const s = String(x ?? \"\").toLowerCase();\n  if (s === \"on\" || s === \"true\" || s === \"1\") return 1;\n  if (s === \"off\" || s === \"false\" || s === \"0\") return 0;\n  const n = toNum(x);\n  return Number.isFinite(n) ? (n ? 1 : 0) : null;\n}\n\n// Leak sensor (Node 18) vDev IDs\nconst leakTemp      = toNum(byId.get(\"ZWayVDev_zway_18-0-49-1\")?.metrics?.level);      // °C\nconst leakWater     = to01(byId.get(\"ZWayVDev_zway_18-0-113-5-2-A\")?.metrics?.level);  // on/off\nconst leakTamper    = to01(byId.get(\"ZWayVDev_zway_18-0-113-7-3-A\")?.metrics?.level);  // on/off\nconst leakBattery   = toNum(byId.get(\"ZWayVDev_zway_18-0-128\")?.metrics?.level);       // %\nconst leakGenAlarm  = to01(byId.get(\"ZWayVDev_zway_18-0-156-0-A\")?.metrics?.level);    // on/off\nconst leakWaterAlm  = to01(byId.get(\"ZWayVDev_zway_18-0-156-5-A\")?.metrics?.level);    // on/off\n\nmsg.payload = {\n  leakTemp,\n  leakWater,\n  leakTamper,\n  leakBattery,\n  leakGenAlarm,\n  leakWaterAlm,\n  ts: Date.now()\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 400,
+        "wires": [
+            [
+                "d218ab2340cef028"
+            ]
+        ]
+    },
+    {
+        "id": "d218ab2340cef028",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "Make UI Messages",
+        "func": "const p = msg.payload;\n\nconst msgs = [\n  { topic: \"leak.temp\",        payload: p.leakTemp },\n  { topic: \"leak.water\",       payload: p.leakWater },\n  { topic: \"leak.tamper\",      payload: p.leakTamper },\n  { topic: \"leak.battery\",     payload: p.leakBattery },\n  { topic: \"leak.generalAlarm\",payload: p.leakGenAlarm },\n  { topic: \"leak.waterAlarm\",  payload: p.leakWaterAlm }\n];\n\nreturn [msgs]; // IMPORTANT\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 400,
+        "wires": [
+            [
+                "fd29420b657ad81c"
+            ]
+        ]
+    },
+    {
+        "id": "fa692115c160e1bc",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "bc37e19755b1a675"
+            ]
+        ]
+    },
+    {
+        "id": "bc37e19755b1a675",
+        "type": "http request",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 400,
+        "wires": [
+            [
+                "4ee8f407039de368"
+            ]
+        ]
+    },
+    {
+        "id": "fd29420b657ad81c",
+        "type": "switch",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "leak.temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "leak.water",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "leak.tamper",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "leak.battery",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "leak.generalAlarm",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "leak.waterAlarm",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 6,
+        "x": 1170,
+        "y": 620,
+        "wires": [
+            [
+                "6cf74992be8debfa",
+                "682e79778ecdd21e"
+            ],
+            [
+                "54bfe25c8717394f",
+                "df4237fa8233f223",
+                "afc9fed3461b518b",
+                "8e301b63cdf4caec"
+            ],
+            [
+                "8cb8aec9cb6e49c4",
+                "75ea7d035da6b97f"
+            ],
+            [
+                "2334e1245520cb09"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "6cf74992be8debfa",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1430,
+        "y": 320,
+        "wires": [
+            [
+                "ad4093dd90138dda"
+            ]
+        ]
+    },
+    {
+        "id": "54bfe25c8717394f",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"Water is Leaking\" : \"No Water Leakage\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 360,
+        "wires": [
+            [
+                "766ac7cb7ab83a78"
+            ]
+        ]
+    },
+    {
+        "id": "ad4093dd90138dda",
+        "type": "ui-chart",
+        "z": "30217c7e733b94c0",
+        "group": "b1d4dcdf5d18c14e",
+        "name": "Temperature",
+        "label": "Temperature",
+        "order": 3,
+        "chartType": "area",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "3",
+        "showLegend": true,
+        "removeOlder": "5",
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": "4",
+        "className": "",
+        "interpolation": "linear",
+        "x": 1650,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "766ac7cb7ab83a78",
+        "type": "ui-text",
+        "z": "30217c7e733b94c0",
+        "group": "b1d4dcdf5d18c14e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Water Leakage",
+        "label": "Water Leakage Status :",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#053b4d",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1660,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "7e9a7078270bd915",
+        "type": "ui-notification",
+        "z": "30217c7e733b94c0",
+        "ui": "a5694dd5abd38f3c",
+        "position": "top center",
+        "colorDefault": false,
+        "color": "#06bcf9",
+        "displayTime": "6",
+        "showCountdown": false,
+        "outputs": 1,
+        "allowDismiss": false,
+        "dismissText": "Close",
+        "allowConfirm": false,
+        "confirmText": "Confirm",
+        "raw": false,
+        "className": "",
+        "name": "Leakage Alarm",
+        "x": 1820,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2334e1245520cb09",
+        "type": "ui-gauge",
+        "z": "30217c7e733b94c0",
+        "name": "Battery",
+        "group": "b1d4dcdf5d18c14e",
+        "order": 4,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "6",
+        "height": "2",
+        "gtype": "gauge-battery",
+        "gstyle": "needle",
+        "title": "Battery",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "40",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "70",
+                "color": "#25c125",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1560,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8cb8aec9cb6e49c4",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"Tampered\" : \"Stable\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 400,
+        "wires": [
+            [
+                "d0efea865e15a11c"
+            ]
+        ]
+    },
+    {
+        "id": "d0efea865e15a11c",
+        "type": "ui-text",
+        "z": "30217c7e733b94c0",
+        "group": "b1d4dcdf5d18c14e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Water Tamper",
+        "label": "Leak Tamper :",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#034a54",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1660,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "c4eb700f8617e6f7",
+        "type": "inject",
+        "z": "30217c7e733b94c0",
+        "name": "Start influxDB Move",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 400,
+        "wires": [
+            [
+                "fa692115c160e1bc"
+            ]
+        ]
+    },
+    {
+        "id": "682e79778ecdd21e",
+        "type": "change",
+        "z": "30217c7e733b94c0",
+        "name": "Temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "leak.temp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1590,
+        "y": 680,
+        "wires": [
+            [
+                "8ab67d7314137c04"
+            ]
+        ]
+    },
+    {
+        "id": "df4237fa8233f223",
+        "type": "change",
+        "z": "30217c7e733b94c0",
+        "name": "Water Leakage",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "leak.water",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1620,
+        "y": 720,
+        "wires": [
+            [
+                "8ab67d7314137c04"
+            ]
+        ]
+    },
+    {
+        "id": "75ea7d035da6b97f",
+        "type": "change",
+        "z": "30217c7e733b94c0",
+        "name": "water tamper",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "leak.tamper",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1610,
+        "y": 760,
+        "wires": [
+            [
+                "8ab67d7314137c04"
+            ]
+        ]
+    },
+    {
+        "id": "bab8be364e6d99e2",
+        "type": "influxdb out",
+        "z": "30217c7e733b94c0",
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "smart_echo Bucket",
+        "measurement": "leak",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Rgroup",
+        "bucket": "smart_echo",
+        "x": 2330,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "8ab67d7314137c04",
+        "type": "join",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "2",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1830,
+        "y": 720,
+        "wires": [
+            [
+                "15cdd320cc12be8a"
+            ]
+        ]
+    },
+    {
+        "id": "15cdd320cc12be8a",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "function 4",
+        "func": "const p = msg.payload || {};\n\nfunction toFloat(v) {\n  const n = Number(v);\n  return Number.isFinite(n) ? n : null;\n}\n\nfunction waterToInt(v) {\n  const s = String(v).toLowerCase();\n  if (s.includes(\"no water\")) return 0;\n  if (s.includes(\"water\")) return 1;\n  const n = Number(v);\n  if (Number.isFinite(n)) return n ? 1 : 0;\n  return null;\n}\n\nfunction tamperToInt(v) {\n  const s = String(v).toLowerCase();\n  if (s.includes(\"stable\") || s.includes(\"ok\") || s.includes(\"no\")) return 0;\n  if (s.includes(\"tamper\") || s.includes(\"alarm\") || s.includes(\"trigger\")) return 1;\n  const n = Number(v);\n  if (Number.isFinite(n)) return n ? 1 : 0;\n  return null;\n}\n\nconst temp   = toFloat(p[\"leak.temp\"]);\nconst water  = waterToInt(p[\"leak.water\"]);\nconst tamper = tamperToInt(p[\"leak.tamper\"]);\n\nif (temp === null || water === null || tamper === null) return null;\n\nmsg.payload = [\n  { leak_temp: temp, leak_water: water, leak_tamper: tamper },\n  { device: \"leak\", source: \"zway\" }\n];\n\nmsg.measurement = \"leak\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2060,
+        "y": 720,
+        "wires": [
+            [
+                "bab8be364e6d99e2"
+            ]
+        ]
+    },
+    {
+        "id": "afc9fed3461b518b",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "leak function notification",
+        "func": "// Output 1: ui-table (add ONE row)\n// Output 2: ui-notification (toast)\n// Trigger only when leak changes 0 -> 1\n\nlet leakVal = null;\n\n// case 1: topic/value\nif (msg.topic === \"leak.water\") leakVal = Number(msg.payload);\n\n// case 2: joined object\nif (msg.payload && typeof msg.payload === \"object\" && msg.payload[\"leak.water\"] !== undefined) {\n    leakVal = Number(msg.payload[\"leak.water\"]);\n}\n\nif (leakVal === null || Number.isNaN(leakVal)) return null;\n\n// edge detect\nconst last = flow.get(\"leak_last_state\");\nflow.set(\"leak_last_state\", leakVal);\n\n// Only on rising edge\nif (!((last === 0 || last === undefined) && leakVal === 1)) return null;\n\nconst row = {\n    time: new Date().toLocaleString(),\n    source: \"Leak Sensor\",\n    severity: \"ALERT\",\n    message: \"🚨 Water is leaking! Please check the tap.\"\n};\n\n// ✅ send ONLY the new row to table (prevents duplicates)\nconst tableMsg = { payload: [row] };\n\n// ✅ toast must be a string (prevents vertical list)\nconst toastMsg = { payload: row.message };\n\nreturn [tableMsg, toastMsg];\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1670,
+        "y": 460,
+        "wires": [
+            [
+                "6e84d7427ab3f490"
+            ]
+        ]
+    },
+    {
+        "id": "8e301b63cdf4caec",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "function 8",
+        "func": "// Send popup notification when leak.water == 1\n\nlet isLeak = false;\n\n// If msg.topic carries the sensor name and msg.payload is 0/1\nif (msg.topic === \"leak.water\" && Number(msg.payload) === 1) {\n    isLeak = true;\n}\n\n// If msg.payload is an object that contains leak.water\nif (msg.payload && typeof msg.payload === \"object\" && Number(msg.payload[\"leak.water\"]) === 1) {\n    isLeak = true;\n}\n\nif (!isLeak) return null;\n\n// Message for popup notification\nmsg.payload = \"🚨 Water is leaking! Please check the tap.\";\n// optional (some notification nodes support it)\nmsg.topic = \"Leak Alert\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1640,
+        "y": 560,
+        "wires": [
+            [
+                "7e9a7078270bd915"
+            ]
+        ]
+    },
+    {
+        "id": "6e84d7427ab3f490",
+        "type": "ui-table",
+        "z": "30217c7e733b94c0",
+        "group": "9e1cc986f772b04a",
+        "name": "",
+        "label": "",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "maxrows": 0,
+        "passthru": false,
+        "autocols": true,
+        "showSearch": false,
+        "deselect": true,
+        "selectionType": "none",
+        "columns": [],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "append",
+        "className": "",
+        "x": 1950,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2070ab78a02e6858",
+        "type": "http in",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "http in",
+        "url": "/export/leak",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 350,
+        "y": 1080,
+        "wires": [
+            [
+                "381c04e5e53d9e4e"
+            ]
+        ]
+    },
+    {
+        "id": "381c04e5e53d9e4e",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "set days",
+        "func": "msg.days = Math.max(1, Math.min(365, Number(msg.req.query.days || 7)));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 1080,
+        "wires": [
+            [
+                "3c11a7916d50048b"
+            ]
+        ]
+    },
+    {
+        "id": "3c11a7916d50048b",
+        "type": "influxdb in",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "InfluxBD ",
+        "query": "from(bucket: \"smart_echo\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"leak\")\n  |> filter(fn: (r) =>\n    r[\"_field\"] == \"leak_temp\" or\n    r[\"_field\"] == \"leak_water\" or\n    r[\"_field\"] == \"leak_tamper\"\n  )\n  |> keep(columns: [\"_time\",\"_field\",\"_value\",\"device\",\"source\"])\n  |> sort(columns: [\"_time\"])\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "Rgroup",
+        "x": 780,
+        "y": 1080,
+        "wires": [
+            [
+                "5e0215c7f61d2f16"
+            ]
+        ]
+    },
+    {
+        "id": "5e0215c7f61d2f16",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "download + csv",
+        "func": "\nconst rows = Array.isArray(msg.payload) ? msg.payload : [];\n\nmsg.payload = rows.map(r => ({\n  time: r._time || r.time || \"\",\n  field: r._field || r.field || \"\",\n  value: (r._value !== undefined) ? r._value : (r.value ?? \"\"),\n  device: r.device || \"\",\n  source: r.source || \"\"\n}));\n\nconst days = msg.days || 7;\nmsg.headers = {\n  \"Content-Type\": \"text/csv; charset=utf-8\",\n  \"Content-Disposition\": `attachment; filename=\"leak_${days}d.csv\"`\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 1200,
+        "wires": [
+            [
+                "1d3533d1a7f6336f",
+                "3ddff58146ecf28c"
+            ]
+        ]
+    },
+    {
+        "id": "1d3533d1a7f6336f",
+        "type": "csv",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "all",
+        "multi": "mult",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 1250,
+        "y": 1200,
+        "wires": [
+            [
+                "c3356def3865a01f"
+            ]
+        ]
+    },
+    {
+        "id": "3ddff58146ecf28c",
+        "type": "debug",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "c3356def3865a01f",
+        "type": "http response",
+        "z": "30217c7e733b94c0",
+        "d": true,
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "fe8aa4a138eaa35a",
+        "type": "http in",
+        "z": "30217c7e733b94c0",
+        "name": "http in",
+        "url": "/export/all",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 830,
+        "y": 1700,
+        "wires": [
+            [
+                "a112d07cd7e766d4"
+            ]
+        ]
+    },
+    {
+        "id": "5ab32d87c21c5c04",
+        "type": "influxdb in",
+        "z": "30217c7e733b94c0",
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "InfluxBD ",
+        "query": "from(bucket: \"smart_echo\")\n  |> range(start: today())\n  |> filter(fn: (r) =>\n    r._measurement == \"air_quality\" or\n    r._measurement == \"leak\" or\n    r._measurement == \"plug\" or\n    r._measurement == \"smoke\" or\n    r._measurement == \"vibration\"\n  )\n  |> filter(fn: (r) =>\n    r._field == \"co2\" or r._field == \"dewPoint\" or r._field == \"humidity\" or r._field == \"temperature\" or r._field == \"voc\" or\n    r._field == \"leak_tamper\" or r._field == \"leak_temp\" or r._field == \"leak_water\" or\n    r._field == \"plug_energy\" or r._field == \"plug_overCurrent\" or r._field == \"plug_overLoad\" or r._field == \"plug_power\" or\n    r._field == \"smoke_tamper\" or r._field == \"smoke_temp\" or\n    r._field == \"vib_temp\" or r._field == \"vib_tamper\" or r._field == \"vib_seismic\" or r._field == \"vib_lux\" or\n    r._field == \"vib_az\" or r._field == \"vib_ay\" or r._field == \"vib_ax\" or r._field == \"vib_alarm\"\n  )\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> map(fn: (r) => ({ r with _field: r._field + \"_\" + r._measurement }))\n  |> group(columns: [])\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> rename(columns: {_time: \"timestamp\"})\n  |> keep(columns: [\n      \"timestamp\",\n      \"co2_air_quality\", \"dewPoint_air_quality\", \"humidity_air_quality\", \"temperature_air_quality\", \"voc_air_quality\",\n      \"leak_tamper_leak\", \"leak_temp_leak\", \"leak_water_leak\",\n      \"plug_energy_plug\", \"plug_overCurrent_plug\", \"plug_overLoad_plug\", \"plug_power_plug\",\n      \"smoke_tamper_smoke\", \"smoke_temp_smoke\",\n      \"vib_temp_vibration\", \"vib_tamper_vibration\", \"vib_seismic_vibration\", \"vib_lux_vibration\",\n      \"vib_az_vibration\", \"vib_ay_vibration\", \"vib_ax_vibration\", \"vib_alarm_vibration\"\n  ])\n  |> sort(columns: [\"timestamp\"])\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "Rgroup",
+        "x": 1160,
+        "y": 1700,
+        "wires": [
+            [
+                "de930b9a210ab082"
+            ]
+        ]
+    },
+    {
+        "id": "de930b9a210ab082",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "download + csv",
+        "func": "// msg.payload should already be an array of objects from the influx query\nmsg.headers = {\n  \"Content-Type\": \"text/csv; charset=utf-8\",\n  \"Content-Disposition\": 'attachment; filename=\"all_sensors_today.csv\"'\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 1700,
+        "wires": [
+            [
+                "5283d3af4b648004"
+            ]
+        ]
+    },
+    {
+        "id": "5283d3af4b648004",
+        "type": "csv",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "all",
+        "multi": "mult",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 1550,
+        "y": 1700,
+        "wires": [
+            [
+                "afdbfbd4601c2497"
+            ]
+        ]
+    },
+    {
+        "id": "afdbfbd4601c2497",
+        "type": "http response",
+        "z": "30217c7e733b94c0",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1730,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "c80923c3f390ccdc",
+        "type": "ui-template",
+        "z": "30217c7e733b94c0",
+        "group": "0bc1973ac5e7e081",
+        "page": "",
+        "ui": "",
+        "name": "Downlad All sensor Data",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "head": "",
+        "format": "<button id=\"dlbtn\"\n  style=\"padding:10px 16px; border-radius:8px; border:0; cursor:pointer; font-weight:600;\">\n  ⬇ Download All Sensor Data (Today)\n</button>\n\n<script>\n  document.getElementById(\"dlbtn\").onclick = function () {\n    const url = window.location.origin + \"/export/all\";\n    window.location.href = url;  // avoids popup blockers\n  };\n</script>\n",
+        "storeOutMessages": true,
+        "passthru": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1750,
+        "y": 1780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a112d07cd7e766d4",
+        "type": "function",
+        "z": "30217c7e733b94c0",
+        "name": "set days",
+        "func": "msg.days = Math.max(1, Math.min(365, Number(msg.req.query.days || 1)));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 1700,
+        "wires": [
+            [
+                "5ab32d87c21c5c04"
+            ]
+        ]
+    },
+    {
+        "id": "59a696be5514974b",
+        "type": "inject",
+        "z": "505946dca9cb35ba",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 320,
+        "wires": [
+            [
+                "7c41912b1463f467"
+            ]
+        ]
+    },
+    {
+        "id": "7c41912b1463f467",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "login payload",
+        "func": "msg.headers = {\"Content-Type\":\"application/json\"};\nmsg.payload = { login: \"admin\", password: \"654321\" };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 320,
+        "wires": [
+            [
+                "b571660b06519777"
+            ]
+        ]
+    },
+    {
+        "id": "b571660b06519777",
+        "type": "http request",
+        "z": "505946dca9cb35ba",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/login",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 320,
+        "wires": [
+            [
+                "f5cea446e6b55861"
+            ]
+        ]
+    },
+    {
+        "id": "f5cea446e6b55861",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "store sid",
+        "func": "// Try JSON sid first\nlet sid = msg.payload?.data?.sid;\n\n// If not present, try Set-Cookie header\nif (!sid) {\n  const setCookie = msg.headers?.['set-cookie'] || msg.headers?.['Set-Cookie'];\n  // set-cookie may be an array\n  const cookies = Array.isArray(setCookie) ? setCookie : [setCookie].filter(Boolean);\n\n  for (const c of cookies) {\n    const m = String(c).match(/ZWAYSession=([^;]+)/);\n    if (m) { sid = m[1]; break; }\n  }\n}\n\nif (!sid) {\n  node.error(\"Login response did not include sid or ZWAYSession cookie.\", {\n    payload: msg.payload,\n    headers: msg.headers\n  });\n  return null;\n}\n\nglobal.set(\"zway_sid\", sid);\nnode.warn(\"SID stored successfully\");\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b09f15a97dd8d91",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "vDev ID - funtcion",
+        "func": "const devices = msg.payload?.data?.devices || [];\nconst byId = new Map(devices.map(d => [String(d.id), d]));\n\nfunction toNum(x) {\n  const m = String(x ?? \"\").replace(\",\", \".\").match(/-?\\d+(\\.\\d+)?/);\n  return m ? Number(m[0]) : null;\n}\n\nfunction to01(x) {\n  const s = String(x ?? \"\").toLowerCase();\n  if (s === \"on\" || s === \"true\" || s === \"1\") return 1;\n  if (s === \"off\" || s === \"false\" || s === \"0\") return 0;\n  const n = toNum(x);\n  return Number.isFinite(n) ? (n ? 1 : 0) : null;\n}\n\n// Smoke sensor (Node 16) vDev IDs\nconst smokeTemp     = toNum(byId.get(\"ZWayVDev_zway_16-0-49-1\")?.metrics?.level);        // °C\nconst smokeAlarm    = to01(byId.get(\"ZWayVDev_zway_16-0-113-1-2-A\")?.metrics?.level);    // on/off\nconst heatAlarm     = to01(byId.get(\"ZWayVDev_zway_16-0-113-4-2-A\")?.metrics?.level);    // on/off\nconst tamperAlarm   = to01(byId.get(\"ZWayVDev_zway_16-0-113-7-3-A\")?.metrics?.level);    // on/off\nconst lowBatteryAlm = to01(byId.get(\"ZWayVDev_zway_16-0-113-8-10-A\")?.metrics?.level);   // on/off\nconst hwFailureAlm  = to01(byId.get(\"ZWayVDev_zway_16-0-113-9-1-A\")?.metrics?.level);    // on/off\nconst battery       = toNum(byId.get(\"ZWayVDev_zway_16-0-128\")?.metrics?.level);         // %\n\nmsg.payload = {\n  smokeTemp,\n  smokeAlarm,\n  heatAlarm,\n  tamperAlarm,\n  lowBatteryAlm,\n  hwFailureAlm,\n  battery,\n  ts: Date.now()\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 460,
+        "wires": [
+            [
+                "e5f393f2f60c17f7"
+            ]
+        ]
+    },
+    {
+        "id": "e5f393f2f60c17f7",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "Make UI Messages",
+        "func": "const p = msg.payload;\n\nconst msgs = [\n  { topic: \"smoke.temp\",          payload: p.smokeTemp },\n  { topic: \"smoke.smokeAlarm\",    payload: p.smokeAlarm },\n  { topic: \"smoke.heatAlarm\",     payload: p.heatAlarm },\n  { topic: \"smoke.tamper\",        payload: p.tamperAlarm },\n  { topic: \"smoke.lowBattery\",    payload: p.lowBatteryAlm },\n  { topic: \"smoke.hardwareFail\",  payload: p.hwFailureAlm },\n  { topic: \"smoke.battery\",       payload: p.battery }\n];\n\nreturn [msgs]; // IMPORTANT\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 460,
+        "wires": [
+            [
+                "6400173c455a2a24"
+            ]
+        ]
+    },
+    {
+        "id": "7d56e66732611c7c",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 460,
+        "wires": [
+            [
+                "4fcfa27e52461ac8"
+            ]
+        ]
+    },
+    {
+        "id": "4fcfa27e52461ac8",
+        "type": "http request",
+        "z": "505946dca9cb35ba",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 690,
+        "y": 460,
+        "wires": [
+            [
+                "5b09f15a97dd8d91"
+            ]
+        ]
+    },
+    {
+        "id": "ff4450db28f88567",
+        "type": "inject",
+        "z": "505946dca9cb35ba",
+        "name": "Start influxDB Move",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 460,
+        "wires": [
+            [
+                "7d56e66732611c7c"
+            ]
+        ]
+    },
+    {
+        "id": "70e299e8c1f8c362",
+        "type": "ui-gauge",
+        "z": "505946dca9cb35ba",
+        "name": "Temperature (°C)",
+        "group": "ad0a25ddcf4b6825",
+        "order": 3,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "6",
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Smoke Sensor Temperature (°C)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-10",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "25",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "70",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "-10",
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1890,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a6495a8eb775a2db",
+        "type": "ui-text",
+        "z": "505946dca9cb35ba",
+        "group": "ad0a25ddcf4b6825",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Smoke Alarm",
+        "label": "Smoke Alarm :",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1890,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "bb410e2c47d0083c",
+        "type": "ui-text",
+        "z": "505946dca9cb35ba",
+        "group": "ad0a25ddcf4b6825",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Heat Alarm",
+        "label": "Heat Alarm :",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1890,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "71030406b7764b5c",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 340,
+        "wires": [
+            [
+                "70e299e8c1f8c362"
+            ]
+        ]
+    },
+    {
+        "id": "64f45c125f424942",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"ON\" : \"OFF\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1570,
+        "y": 380,
+        "wires": [
+            [
+                "a6495a8eb775a2db"
+            ]
+        ]
+    },
+    {
+        "id": "caa76b20eb463723",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"ON\" : \"OFF\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1570,
+        "y": 420,
+        "wires": [
+            [
+                "bb410e2c47d0083c"
+            ]
+        ]
+    },
+    {
+        "id": "6400173c455a2a24",
+        "type": "switch",
+        "z": "505946dca9cb35ba",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "smoke.temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.smokeAlarm",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.heatAlarm",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.tamper",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.lowBattery",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.hardwareFail",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "smoke.battery",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 7,
+        "x": 1350,
+        "y": 460,
+        "wires": [
+            [
+                "71030406b7764b5c",
+                "4c833c7e5cf7ce82"
+            ],
+            [
+                "64f45c125f424942",
+                "0819062506bca0c4"
+            ],
+            [
+                "caa76b20eb463723",
+                "0819062506bca0c4"
+            ],
+            [
+                "0819062506bca0c4",
+                "c8b0292d9ab91071"
+            ],
+            [],
+            [],
+            [
+                "bc917edc04569137"
+            ]
+        ]
+    },
+    {
+        "id": "bc917edc04569137",
+        "type": "ui-gauge",
+        "z": "505946dca9cb35ba",
+        "name": "Battery",
+        "group": "ad0a25ddcf4b6825",
+        "order": 4,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "6",
+        "height": "2",
+        "gtype": "gauge-battery",
+        "gstyle": "needle",
+        "title": "Battery",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#f73918",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "15",
+                "color": "#cfa120",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "35",
+                "color": "#fdd853",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "80",
+                "color": "#2dbe36",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1500,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4c833c7e5cf7ce82",
+        "type": "change",
+        "z": "505946dca9cb35ba",
+        "name": "Temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "smoke.temp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1830,
+        "y": 680,
+        "wires": [
+            [
+                "01e5a0271c823d62"
+            ]
+        ]
+    },
+    {
+        "id": "c8b0292d9ab91071",
+        "type": "change",
+        "z": "505946dca9cb35ba",
+        "name": "smoke tamper",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "smoke.tamper",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1860,
+        "y": 720,
+        "wires": [
+            [
+                "01e5a0271c823d62"
+            ]
+        ]
+    },
+    {
+        "id": "01e5a0271c823d62",
+        "type": "join",
+        "z": "505946dca9cb35ba",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "2",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 2050,
+        "y": 660,
+        "wires": [
+            [
+                "d9742ebb5edb72d9"
+            ]
+        ]
+    },
+    {
+        "id": "0113d93637a7c868",
+        "type": "influxdb out",
+        "z": "505946dca9cb35ba",
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "smart_echo Bucket",
+        "measurement": "smoke",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Rgroup",
+        "bucket": "smart_echo",
+        "x": 2470,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "d9742ebb5edb72d9",
+        "type": "function",
+        "z": "505946dca9cb35ba",
+        "name": "function 5",
+        "func": "const p = msg.payload || {};\n\n// --- helpers ---\nfunction toFloat(v) {\n  const n = Number(v);\n  return Number.isFinite(n) ? n : null;\n}\n\n// Convert tamper states to 0/1\nfunction tamperToInt(v) {\n  const s = String(v).toLowerCase();\n\n  // stable / ok / no tamper = 0\n  if (s.includes(\"stable\") || s.includes(\"ok\") || s.includes(\"no\")) return 0;\n\n  // triggered / alarm / tamper = 1\n  if (s.includes(\"tamper\") || s.includes(\"alarm\") || s.includes(\"trigger\")) return 1;\n\n  // numeric fallback\n  const n = Number(v);\n  if (Number.isFinite(n)) return n ? 1 : 0;\n\n  return null;\n}\n\n// --- read dotted keys from Join output ---\nconst temp   = toFloat(p[\"smoke.temp\"]);\nconst tamper = tamperToInt(p[\"smoke.tamper\"]);\n\n// If missing, skip write\nif (temp === null || tamper === null) return null;\n\n// Fields (store numeric fields)\nconst fields = {\n  smoke_temp: temp,\n  smoke_tamper: tamper\n};\n\n// Tags\nconst tags = {\n  device: \"smoke\",\n  source: \"zway\"\n};\n\n// Write to Influx\nmsg.payload = [fields, tags];\nmsg.measurement = \"smoke\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2200,
+        "y": 660,
+        "wires": [
+            [
+                "0113d93637a7c868"
+            ]
+        ]
+    },
+    {
+        "id": "0819062506bca0c4",
+        "type": "debug",
+        "z": "505946dca9cb35ba",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1940,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "44dc14e128203419",
+        "type": "inject",
+        "z": "f24a94f20292b0a2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 450,
+        "y": 260,
+        "wires": [
+            [
+                "afc8d86d337eef1e"
+            ]
+        ]
+    },
+    {
+        "id": "afc8d86d337eef1e",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "login payload",
+        "func": "msg.headers = {\"Content-Type\":\"application/json\"};\nmsg.payload = { login: \"admin\", password: \"654321\" };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 260,
+        "wires": [
+            [
+                "99bee4f319c1e329"
+            ]
+        ]
+    },
+    {
+        "id": "99bee4f319c1e329",
+        "type": "http request",
+        "z": "f24a94f20292b0a2",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/login",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 810,
+        "y": 260,
+        "wires": [
+            [
+                "db9d20e251087d6f"
+            ]
+        ]
+    },
+    {
+        "id": "db9d20e251087d6f",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "store sid",
+        "func": "// Try JSON sid first\nlet sid = msg.payload?.data?.sid;\n\n// If not present, try Set-Cookie header\nif (!sid) {\n  const setCookie = msg.headers?.['set-cookie'] || msg.headers?.['Set-Cookie'];\n  // set-cookie may be an array\n  const cookies = Array.isArray(setCookie) ? setCookie : [setCookie].filter(Boolean);\n\n  for (const c of cookies) {\n    const m = String(c).match(/ZWAYSession=([^;]+)/);\n    if (m) { sid = m[1]; break; }\n  }\n}\n\nif (!sid) {\n  node.error(\"Login response did not include sid or ZWAYSession cookie.\", {\n    payload: msg.payload,\n    headers: msg.headers\n  });\n  return null;\n}\n\nglobal.set(\"zway_sid\", sid);\nnode.warn(\"SID stored successfully\");\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e21dbef3fb269761",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "d": true,
+        "name": "Find node vDevs",
+        "func": "const NODE = 19; // change to your smoke node / plug node / leak node / vibration node\nconst devices = msg.payload?.data?.devices || [];\n\nconst hits = devices\n  .filter(d => String(d.id).includes(`zway_${NODE}-`))\n  .map(d => ({\n    id: d.id,\n    title: d.metrics?.title,\n    probeTitle: d.metrics?.probeTitle,\n    level: d.metrics?.level,\n    unit: d.metrics?.scaleTitle || d.metrics?.unit || \"\"\n  }));\n\nmsg.payload = hits;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5ec1072766508096",
+        "type": "inject",
+        "z": "f24a94f20292b0a2",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 500,
+        "wires": [
+            [
+                "5b92b261b17c1c1b"
+            ]
+        ]
+    },
+    {
+        "id": "5b92b261b17c1c1b",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "d": true,
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 500,
+        "wires": [
+            [
+                "d34260455073b2ac"
+            ]
+        ]
+    },
+    {
+        "id": "d34260455073b2ac",
+        "type": "http request",
+        "z": "f24a94f20292b0a2",
+        "d": true,
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 610,
+        "y": 500,
+        "wires": [
+            [
+                "e21dbef3fb269761"
+            ]
+        ]
+    },
+    {
+        "id": "964ec45526a92fac",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "vDev ID - funtcion",
+        "func": "const devices = msg.payload?.data?.devices || [];\nconst byId = new Map(devices.map(d => [String(d.id), d]));\n\nfunction toNum(x) {\n  const m = String(x ?? \"\").replace(\",\", \".\").match(/-?\\d+(\\.\\d+)?/);\n  return m ? Number(m[0]) : null;\n}\n\nfunction to01(x) {\n  const s = String(x ?? \"\").toLowerCase();\n  if (s === \"on\" || s === \"true\" || s === \"1\") return 1;\n  if (s === \"off\" || s === \"false\" || s === \"0\") return 0;\n  const n = toNum(x);\n  return Number.isFinite(n) ? (n ? 1 : 0) : null;\n}\n\n// Node 19 vDev IDs\nconst temperature = toNum(byId.get(\"ZWayVDev_zway_19-0-49-1\")?.metrics?.level);    // °C\nconst luminance  = toNum(byId.get(\"ZWayVDev_zway_19-0-49-3\")?.metrics?.level);    // Lux\nconst seismic     = toNum(byId.get(\"ZWayVDev_zway_19-0-49-25\")?.metrics?.level);  // Mercalli\nconst accelX      = toNum(byId.get(\"ZWayVDev_zway_19-0-49-52\")?.metrics?.level);  // m/s²\nconst accelY      = toNum(byId.get(\"ZWayVDev_zway_19-0-49-53\")?.metrics?.level);  // m/s²\nconst accelZ      = toNum(byId.get(\"ZWayVDev_zway_19-0-49-54\")?.metrics?.level);  // m/s²\n\nconst motion      = to01(byId.get(\"ZWayVDev_zway_19-0-113-7-8-A\")?.metrics?.level); // on/off\nconst tamper      = to01(byId.get(\"ZWayVDev_zway_19-0-113-7-3-A\")?.metrics?.level); // on/off\nconst genAlarm    = to01(byId.get(\"ZWayVDev_zway_19-0-156-0-A\")?.metrics?.level);   // on/off\nconst battery     = toNum(byId.get(\"ZWayVDev_zway_19-0-128\")?.metrics?.level);      // %\n\nconst generalPurpose = to01(byId.get(\"ZWayVDev_zway_19-0-48-1\")?.metrics?.level);   // on/off (optional)\n\nmsg.payload = {\n  temperature,\n  luminance,\n  seismic,\n  accelX,\n  accelY,\n  accelZ,\n  motion,\n  tamper,\n  genAlarm,\n  battery,\n  generalPurpose,\n  ts: Date.now()\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 400,
+        "wires": [
+            [
+                "dfa79ccc9c29d00c"
+            ]
+        ]
+    },
+    {
+        "id": "dfa79ccc9c29d00c",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "Make UI Messages",
+        "func": "const p = msg.payload;\n\nconst msgs = [\n  { topic: \"vib.temp\", payload: p.temperature },\n  { topic: \"vib.lux\", payload: p.luminance },\n  { topic: \"vib.seismic\", payload: p.seismic },\n\n  { topic: \"vib.ax\", payload: p.accelX },\n  { topic: \"vib.ay\", payload: p.accelY },\n  { topic: \"vib.az\", payload: p.accelZ },\n\n  { topic: \"vib.motion\", payload: p.motion },\n  { topic: \"vib.tamper\", payload: p.tamper },\n  { topic: \"vib.alarm\", payload: p.genAlarm },\n\n  { topic: \"vib.battery\", payload: p.battery },\n\n  // optional\n  { topic: \"vib.general\", payload: p.generalPurpose }\n];\n\nreturn [msgs];\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1250,
+        "y": 400,
+        "wires": [
+            [
+                "3af7235625f23643"
+            ]
+        ]
+    },
+    {
+        "id": "74a84831e5af19c6",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 400,
+        "wires": [
+            [
+                "32e75a17668d6303"
+            ]
+        ]
+    },
+    {
+        "id": "32e75a17668d6303",
+        "type": "http request",
+        "z": "f24a94f20292b0a2",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 790,
+        "y": 400,
+        "wires": [
+            [
+                "964ec45526a92fac"
+            ]
+        ]
+    },
+    {
+        "id": "c21ca001f17e140c",
+        "type": "inject",
+        "z": "f24a94f20292b0a2",
+        "name": "Start influxDB Move",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 340,
+        "y": 400,
+        "wires": [
+            [
+                "74a84831e5af19c6"
+            ]
+        ]
+    },
+    {
+        "id": "3af7235625f23643",
+        "type": "switch",
+        "z": "f24a94f20292b0a2",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "vib.temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vib.lux",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vib.seismic",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vib.ax",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vib.ay",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vib.az",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vib.motion",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vib.tamper",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vib.alarm",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vib.battery",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vib.general",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 11,
+        "x": 1470,
+        "y": 400,
+        "wires": [
+            [
+                "6ffaa233a6c79d57",
+                "b00d6bca91bd9bba"
+            ],
+            [
+                "4d6902102fa4e443",
+                "5e07c8a9aa525eb9"
+            ],
+            [
+                "39f2cb2e7708e425",
+                "ef57ffa1c0999a31",
+                "4d4f8d3af387b7f5"
+            ],
+            [
+                "0cf5c8477920e998",
+                "32603aa1a82952dd"
+            ],
+            [
+                "4bf31d71d32a53c5",
+                "1f5acaf3da891a70"
+            ],
+            [
+                "e548321d693b3841",
+                "da03863a4a722744"
+            ],
+            [],
+            [
+                "9492050d86fb9f5b"
+            ],
+            [
+                "48ac98834aa45715",
+                "0fa4286a91ef7a40",
+                "9cb9afe0888ab217"
+            ],
+            [
+                "a4d9969c5e723840"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "7a4231de71ef12b9",
+        "type": "ui-gauge",
+        "z": "f24a94f20292b0a2",
+        "name": "Temperature (°C)",
+        "group": "e0da172c67cd5e98",
+        "order": 4,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Temperature (°C)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-10",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "25",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "70",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "-10",
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1870,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0a4b35239f87648c",
+        "type": "ui-gauge",
+        "z": "f24a94f20292b0a2",
+        "name": "Seismic Intensity",
+        "group": "e0da172c67cd5e98",
+        "order": 5,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "6",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Seismic Intensity (Mercalli)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "Mercalli",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "3",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "8",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "12",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1990,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e102528d487ae94a",
+        "type": "ui-gauge",
+        "z": "f24a94f20292b0a2",
+        "name": "Acceleration X (m/s²)",
+        "group": "e0da172c67cd5e98",
+        "order": 6,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "2",
+        "height": "2",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Acceleration X (m/s²)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "m/s²",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-20",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "-10",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "10",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "value"
+            }
+        ],
+        "min": "-20",
+        "max": "20",
+        "sizeThickness": 16,
+        "sizeGap": "3",
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 2040,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ffaa233a6c79d57",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1650,
+        "y": 240,
+        "wires": [
+            [
+                "7a4231de71ef12b9"
+            ]
+        ]
+    },
+    {
+        "id": "0cf5c8477920e998",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1750,
+        "y": 620,
+        "wires": [
+            [
+                "e102528d487ae94a"
+            ]
+        ]
+    },
+    {
+        "id": "4bf31d71d32a53c5",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1750,
+        "y": 660,
+        "wires": [
+            [
+                "95c103c6e979f056"
+            ]
+        ]
+    },
+    {
+        "id": "e548321d693b3841",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1750,
+        "y": 700,
+        "wires": [
+            [
+                "30bb9b8c0199ed7f"
+            ]
+        ]
+    },
+    {
+        "id": "39f2cb2e7708e425",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1750,
+        "y": 580,
+        "wires": [
+            [
+                "0a4b35239f87648c"
+            ]
+        ]
+    },
+    {
+        "id": "5cac7bc778521587",
+        "type": "ui-text",
+        "z": "f24a94f20292b0a2",
+        "group": "e0da172c67cd5e98",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Motion Status : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#737378",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 2040,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "95c103c6e979f056",
+        "type": "ui-gauge",
+        "z": "f24a94f20292b0a2",
+        "name": "Acceleration Y (m/s²)",
+        "group": "e0da172c67cd5e98",
+        "order": 8,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "2",
+        "height": "2",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Acceleration X (m/s²)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "m/s²",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-20",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "-10",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "10",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "value"
+            }
+        ],
+        "min": "-20",
+        "max": "20",
+        "sizeThickness": 16,
+        "sizeGap": "3",
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 2080,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "30bb9b8c0199ed7f",
+        "type": "ui-gauge",
+        "z": "f24a94f20292b0a2",
+        "name": "Acceleration Z (m/s²)",
+        "group": "e0da172c67cd5e98",
+        "order": 7,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "2",
+        "height": "2",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Acceleration X (m/s²)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "m/s²",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-20",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "-10",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "value"
+            },
+            {
+                "from": "10",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "value"
+            }
+        ],
+        "min": "-20",
+        "max": "20",
+        "sizeThickness": 16,
+        "sizeGap": "3",
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 2120,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "48ac98834aa45715",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"Motion Detected\" : \"Idle\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1690,
+        "y": 900,
+        "wires": [
+            [
+                "5cac7bc778521587",
+                "cfd249c90ae9b13e"
+            ]
+        ]
+    },
+    {
+        "id": "4d6902102fa4e443",
+        "type": "ui-gauge",
+        "z": "f24a94f20292b0a2",
+        "name": "",
+        "group": "e0da172c67cd5e98",
+        "order": 3,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Luminance",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "Lux",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "150",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "400",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "500",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1870,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a4d9969c5e723840",
+        "type": "ui-gauge",
+        "z": "f24a94f20292b0a2",
+        "name": "Battery",
+        "group": "e0da172c67cd5e98",
+        "order": 9,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "6",
+        "height": "2",
+        "gtype": "gauge-battery",
+        "gstyle": "needle",
+        "title": "Battery",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "40",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "70",
+                "color": "#21c421",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1600,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9492050d86fb9f5b",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"Tampered\" : \"Idle\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1710,
+        "y": 840,
+        "wires": [
+            [
+                "f2a134e8422a878d",
+                "b8873486bf96092c"
+            ]
+        ]
+    },
+    {
+        "id": "f2a134e8422a878d",
+        "type": "ui-text",
+        "z": "f24a94f20292b0a2",
+        "group": "e0da172c67cd5e98",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Tamper Status : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#605f5c",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 2040,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "b00d6bca91bd9bba",
+        "type": "change",
+        "z": "f24a94f20292b0a2",
+        "name": "Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "vib.temp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2410,
+        "y": 300,
+        "wires": [
+            [
+                "a4f53e97a46572a1"
+            ]
+        ]
+    },
+    {
+        "id": "5e07c8a9aa525eb9",
+        "type": "change",
+        "z": "f24a94f20292b0a2",
+        "name": "Luminance",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "vib.lux",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2410,
+        "y": 360,
+        "wires": [
+            [
+                "a4f53e97a46572a1"
+            ]
+        ]
+    },
+    {
+        "id": "a4f53e97a46572a1",
+        "type": "join",
+        "z": "f24a94f20292b0a2",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "2",
+        "count": "8",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 2690,
+        "y": 360,
+        "wires": [
+            [
+                "d4f83796e69557f8"
+            ]
+        ]
+    },
+    {
+        "id": "ef57ffa1c0999a31",
+        "type": "change",
+        "z": "f24a94f20292b0a2",
+        "name": "Seismic",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "vib.seismic",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2400,
+        "y": 420,
+        "wires": [
+            [
+                "a4f53e97a46572a1"
+            ]
+        ]
+    },
+    {
+        "id": "32603aa1a82952dd",
+        "type": "change",
+        "z": "f24a94f20292b0a2",
+        "name": " Acceleration X",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "vib.ax",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2420,
+        "y": 480,
+        "wires": [
+            [
+                "a4f53e97a46572a1"
+            ]
+        ]
+    },
+    {
+        "id": "1f5acaf3da891a70",
+        "type": "change",
+        "z": "f24a94f20292b0a2",
+        "name": "Acceleration Y",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "vib.ay",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2420,
+        "y": 540,
+        "wires": [
+            [
+                "a4f53e97a46572a1"
+            ]
+        ]
+    },
+    {
+        "id": "da03863a4a722744",
+        "type": "change",
+        "z": "f24a94f20292b0a2",
+        "name": "Acceleration Z",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "vib.az",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2420,
+        "y": 600,
+        "wires": [
+            [
+                "a4f53e97a46572a1"
+            ]
+        ]
+    },
+    {
+        "id": "b8873486bf96092c",
+        "type": "change",
+        "z": "f24a94f20292b0a2",
+        "name": "Tamper",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "vib.tamper",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2440,
+        "y": 820,
+        "wires": [
+            [
+                "a4f53e97a46572a1"
+            ]
+        ]
+    },
+    {
+        "id": "cfd249c90ae9b13e",
+        "type": "change",
+        "z": "f24a94f20292b0a2",
+        "name": "Alarm",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "vib.alarm",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2470,
+        "y": 860,
+        "wires": [
+            [
+                "a4f53e97a46572a1"
+            ]
+        ]
+    },
+    {
+        "id": "d4f83796e69557f8",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "function 6",
+        "func": "// Robust function for vibration/motion sensor after JOIN\n// Expects msg.payload as an object with keys like \"vib.temp\" ... \"vib.alarm\"\n// (also works if keys are without prefix: \"temp\", \"lux\", etc.)\n\nconst p = msg.payload || {};\n\n// Get value whether the key is \"vib.temp\" or \"temp\"\nfunction pick(dotKey, shortKey) {\n  if (p[dotKey] !== undefined) return p[dotKey];\n  if (p[shortKey] !== undefined) return p[shortKey];\n  return undefined;\n}\n\nfunction toFloat(v) {\n  const n = Number(v);\n  return Number.isFinite(n) ? n : null;\n}\n\n// Convert state strings (Idle/Stable/On/Alarm/etc.) to 0/1\nfunction stateToInt(v) {\n  const s = String(v).toLowerCase().trim();\n\n  // NOT active (0)\n  if (\n    s === \"0\" || s === \"false\" ||\n    s.includes(\"off\") || s.includes(\"idle\") || s.includes(\"clear\") ||\n    s.includes(\"stable\") || s.includes(\"ok\") || s.includes(\"normal\") ||\n    s.includes(\"no\") || s.includes(\"none\")\n  ) return 0;\n\n  // active (1)\n  if (\n    s === \"1\" || s === \"true\" ||\n    s.includes(\"on\") || s.includes(\"alarm\") ||\n    s.includes(\"tamper\") || s.includes(\"trigger\") ||\n    s.includes(\"detect\") || s.includes(\"breach\")\n  ) return 1;\n\n  // numeric fallback\n  const n = Number(v);\n  if (Number.isFinite(n)) return n ? 1 : 0;\n\n  return null;\n}\n\n// Read values (works for both key styles)\nconst temp    = toFloat(pick(\"vib.temp\", \"temp\"));\nconst lux     = toFloat(pick(\"vib.lux\", \"lux\"));\nconst seismic = toFloat(pick(\"vib.seismic\", \"seismic\"));\nconst ax      = toFloat(pick(\"vib.ax\", \"ax\"));\nconst ay      = toFloat(pick(\"vib.ay\", \"ay\"));\nconst az      = toFloat(pick(\"vib.az\", \"az\"));\nconst tamper  = stateToInt(pick(\"vib.tamper\", \"tamper\"));\nconst alarm   = stateToInt(pick(\"vib.alarm\", \"alarm\"));\n\n// If missing, show what's missing then skip write\nconst missing = [];\nif (temp === null) missing.push(\"temp\");\nif (lux === null) missing.push(\"lux\");\nif (seismic === null) missing.push(\"seismic\");\nif (ax === null) missing.push(\"ax\");\nif (ay === null) missing.push(\"ay\");\nif (az === null) missing.push(\"az\");\nif (tamper === null) missing.push(\"tamper\");\nif (alarm === null) missing.push(\"alarm\");\n\nif (missing.length) {\n  node.warn(\n    \"Missing/invalid fields: \" + missing.join(\", \") +\n    \" | payload=\" + JSON.stringify(p)\n  );\n  return null;\n}\n\n// Prepare Influx write\nmsg.payload = [\n  {\n    vib_temp: temp,\n    vib_lux: lux,\n    vib_seismic: seismic,\n    vib_ax: ax,\n    vib_ay: ay,\n    vib_az: az,\n    vib_tamper: tamper,\n    vib_alarm: alarm\n  },\n  { device: \"vibration\", source: \"zway\" }\n];\n\nmsg.measurement = \"vibration\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2800,
+        "y": 360,
+        "wires": [
+            [
+                "9e43fc857f358725"
+            ]
+        ]
+    },
+    {
+        "id": "9e43fc857f358725",
+        "type": "influxdb out",
+        "z": "f24a94f20292b0a2",
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "smart_echo Bucket",
+        "measurement": "motion",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Rgroup",
+        "bucket": "smart_echo",
+        "x": 2970,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "0fa4286a91ef7a40",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "motion function notification log",
+        "func": "// Output 1: ui-table (add ONE row)\n// Output 2: ui-notification (toast)\n// Trigger only when vib.alarm changes 0 -> 1\n\nlet motionVal = null;\n\n// case 1: topic/value\nif (msg.topic === \"vib.alarm\") motionVal = Number(msg.payload);\n\n// case 2: joined object\nif (msg.payload && typeof msg.payload === \"object\" && msg.payload[\"vib.alarm\"] !== undefined) {\n    motionVal = Number(msg.payload[\"vib.alarm\"]);\n}\n\nif (motionVal === null || Number.isNaN(motionVal)) return null;\n\n// edge detect\nconst last = flow.get(\"vib_alarm_last_state\");\nflow.set(\"vib_alarm_last_state\", motionVal);\n\n// Only on rising edge\nif (!((last === 0 || last === undefined) && motionVal === 1)) return null;\n\nconst row = {\n    time: new Date().toLocaleString(),\n    source: \"Motion Sensor\",\n    severity: \"ALERT\",\n    message: \"🚨 Motion detected! Something is fishyy.\"\n};\n\n// send ONLY the new row to table (prevents duplicates)\nconst tableMsg = { payload: [row] };\n\n// toast must be a string\nconst toastMsg = { payload: row.message };\n\nreturn [tableMsg, toastMsg];\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1810,
+        "y": 780,
+        "wires": [
+            [
+                "e185a80c0b3dd279"
+            ]
+        ]
+    },
+    {
+        "id": "e185a80c0b3dd279",
+        "type": "ui-table",
+        "z": "f24a94f20292b0a2",
+        "group": "9e1cc986f772b04a",
+        "name": "log",
+        "label": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "maxrows": 0,
+        "passthru": false,
+        "autocols": true,
+        "showSearch": true,
+        "deselect": true,
+        "selectionType": "none",
+        "columns": [],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "append",
+        "className": "",
+        "x": 2070,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9cb9afe0888ab217",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "motiion function notification",
+        "func": "// Send popup notification when vib.alarm == 1\n\nlet isMotion = false;\n\n// If msg.topic carries the sensor name and msg.payload is 0/1\nif (msg.topic === \"vib.alarm\" && Number(msg.payload) === 1) {\n    isMotion = true;\n}\n\n// If msg.payload is an object that contains vib.alarm\nif (msg.payload && typeof msg.payload === \"object\" && Number(msg.payload[\"vib.alarm\"]) === 1) {\n    isMotion = true;\n}\n\nif (!isMotion) return null;\n\n// Message for popup notification\nmsg.payload = \"🚨 Motion detected! Something is fishyyy.\";\n// optional\nmsg.topic = \"Motion Alert\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1800,
+        "y": 740,
+        "wires": [
+            [
+                "b64023caea5a4eb4"
+            ]
+        ]
+    },
+    {
+        "id": "b64023caea5a4eb4",
+        "type": "ui-notification",
+        "z": "f24a94f20292b0a2",
+        "ui": "a5694dd5abd38f3c",
+        "position": "top right",
+        "colorDefault": false,
+        "color": "#06bcf9",
+        "displayTime": "6",
+        "showCountdown": false,
+        "outputs": 1,
+        "allowDismiss": false,
+        "dismissText": "Close",
+        "allowConfirm": false,
+        "confirmText": "Confirm",
+        "raw": false,
+        "className": "",
+        "name": "Pop up - motion",
+        "x": 2100,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4d4f8d3af387b7f5",
+        "type": "function",
+        "z": "f24a94f20292b0a2",
+        "name": "leak function notification",
+        "func": "// Send popup notification when vib.seismic > 0  (earthquake/vibration detected)\n\nlet seismicVal = null;\n\n// Case 1: msg.topic = \"vib.seismic\", payload is a number\nif (msg.topic === \"vib.seismic\") seismicVal = Number(msg.payload);\n\n// Case 2: msg.payload is an object containing vib.seismic\nif (msg.payload && typeof msg.payload === \"object\" && msg.payload[\"vib.seismic\"] !== undefined) {\n    seismicVal = Number(msg.payload[\"vib.seismic\"]);\n}\n\nif (seismicVal === null || Number.isNaN(seismicVal)) return null;\n\n// Trigger when value is more than zero\nif (seismicVal > 0) {\n    return {\n        topic: \"Earthquake Alert\",\n        payload: \"🚨 It's an earthquake! Go under a bed or table!!\"\n    };\n}\n\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2050,
+        "y": 280,
+        "wires": [
+            [
+                "3274b26f208a3b5b"
+            ]
+        ]
+    },
+    {
+        "id": "3274b26f208a3b5b",
+        "type": "ui-notification",
+        "z": "f24a94f20292b0a2",
+        "ui": "a5694dd5abd38f3c",
+        "position": "top left",
+        "colorDefault": false,
+        "color": "#f9064f",
+        "displayTime": "10",
+        "showCountdown": false,
+        "outputs": 1,
+        "allowDismiss": false,
+        "dismissText": "Close",
+        "allowConfirm": false,
+        "confirmText": "Confirm",
+        "raw": false,
+        "className": "",
+        "name": "pop up -earthquake",
+        "x": 2310,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "776c79960157c34e",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "vDev ID - funtcion",
+        "func": "const devices = msg.payload?.data?.devices || [];\nconst byId = new Map(devices.map(d => [String(d.id), d]));\n\nfunction level(id) {\n  return byId.get(String(id))?.metrics?.level;\n}\n\nfunction toNum(x) {\n  const m = String(x ?? \"\").replace(\",\", \".\").match(/-?\\d+(\\.\\d+)?/);\n  return m ? Number(m[0]) : null;\n}\n\nfunction to01(x) {\n  const s = String(x ?? \"\").toLowerCase();\n  if (s === \"on\" || s === \"true\" || s === \"1\") return 1;\n  if (s === \"off\" || s === \"false\" || s === \"0\") return 0;\n  const n = toNum(x);\n  return Number.isFinite(n) ? (n ? 1 : 0) : null;\n}\n\nmsg.payload = {\n  plug: {\n    switch:     to01(level(\"ZWayVDev_zway_17-0-37\")),\n    powerW:     toNum(level(\"ZWayVDev_zway_17-0-49-4\")),\n    energyKWh:  toNum(level(\"ZWayVDev_zway_17-0-50-0\")),\n    electricW:  toNum(level(\"ZWayVDev_zway_17-0-50-2\")), // optional\n    overCurrent:to01(level(\"ZWayVDev_zway_17-0-113-8-6-A\")),\n    overLoad:   to01(level(\"ZWayVDev_zway_17-0-113-8-8-A\")),\n  },\n\n  ts: Date.now()\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 540,
+        "wires": [
+            [
+                "7018c7f2973855b8"
+            ]
+        ]
+    },
+    {
+        "id": "b866c86d39b9c272",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "attach cookie",
+        "func": "const sid = global.get(\"zway_sid\");\nif (!sid) {\n  node.error(\"No SID stored yet. Run Login inject first.\");\n  return null;\n}\nmsg.headers = msg.headers || {};\nmsg.headers.Cookie = \"ZWAYSession=\" + sid;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 540,
+        "wires": [
+            [
+                "45c7797aed31eec6"
+            ]
+        ]
+    },
+    {
+        "id": "45c7797aed31eec6",
+        "type": "http request",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 550,
+        "y": 540,
+        "wires": [
+            [
+                "776c79960157c34e"
+            ]
+        ]
+    },
+    {
+        "id": "7018c7f2973855b8",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "Make UI Messages",
+        "func": "const p = msg.payload;\n\nconst msgs = [\n  // Plug\n  { topic: \"plug.switch\", payload: p.plug.switch },\n  { topic: \"plug.power\", payload: p.plug.powerW },\n  { topic: \"plug.energy\", payload: p.plug.energyKWh },\n  { topic: \"plug.overCurrent\", payload: p.plug.overCurrent },\n  { topic: \"plug.overLoad\", payload: p.plug.overLoad },\n\n];\n\nreturn [msgs];   // IMPORTANT\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 540,
+        "wires": [
+            [
+                "28713075d22530d2"
+            ]
+        ]
+    },
+    {
+        "id": "28713075d22530d2",
+        "type": "switch",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "plug.switch",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "plug.power",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "plug.energy",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "plug.overCurrent",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "plug.overLoad",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 5,
+        "x": 1150,
+        "y": 540,
+        "wires": [
+            [
+                "7b30b40ae7371bfd"
+            ],
+            [
+                "1bfa737023432834"
+            ],
+            [
+                "0641c529f1be2454"
+            ],
+            [
+                "af259630eb121397"
+            ],
+            [
+                "45d50d0adf3a86ce"
+            ]
+        ]
+    },
+    {
+        "id": "036d1bdcb99c5e2f",
+        "type": "ui-gauge",
+        "z": "e77b158f9548e1ec",
+        "name": "Power Gauge",
+        "group": "f51783401afac088",
+        "order": 5,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Power (W)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "W",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "800",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "1800",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "2500",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1680,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f4d3f67856893e9",
+        "type": "ui-gauge",
+        "z": "e77b158f9548e1ec",
+        "name": "Energy (kWh)",
+        "group": "f51783401afac088",
+        "order": 6,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Energy (kWh)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "kWh",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "15",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "40",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "50",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1680,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b72eb1a0e4daf89e",
+        "type": "ui-text",
+        "z": "e77b158f9548e1ec",
+        "group": "f51783401afac088",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Over-current",
+        "label": "Over-current : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1670,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "4075298e651f9f17",
+        "type": "ui-text",
+        "z": "e77b158f9548e1ec",
+        "group": "f51783401afac088",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Over-load",
+        "label": "Over-load : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1660,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "1bfa737023432834",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1430,
+        "y": 340,
+        "wires": [
+            [
+                "036d1bdcb99c5e2f",
+                "bb4a9ea25608c426"
+            ]
+        ]
+    },
+    {
+        "id": "0641c529f1be2454",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "round figure",
+        "func": "msg.payload = Number(Number(msg.payload).toFixed(2));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1430,
+        "y": 380,
+        "wires": [
+            [
+                "6f4d3f67856893e9",
+                "06ac053b1f3ca69c"
+            ]
+        ]
+    },
+    {
+        "id": "af259630eb121397",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"Current Overload\" : \"Stable\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 420,
+        "wires": [
+            [
+                "b72eb1a0e4daf89e",
+                "4f9ceece5f92ff20"
+            ]
+        ]
+    },
+    {
+        "id": "45d50d0adf3a86ce",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"Energy Overload\" : \"Stable\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 460,
+        "wires": [
+            [
+                "4075298e651f9f17",
+                "513a3ffbd368778a"
+            ]
+        ]
+    },
+    {
+        "id": "1076f69e3ee7ba30",
+        "type": "inject",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 240,
+        "wires": [
+            [
+                "62ab4c7bb94807d9"
+            ]
+        ]
+    },
+    {
+        "id": "62ab4c7bb94807d9",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "login payload",
+        "func": "msg.headers = {\"Content-Type\":\"application/json\"};\nmsg.payload = { login: \"admin\", password: \"654321\" };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 240,
+        "wires": [
+            [
+                "292dec60ce851313"
+            ]
+        ]
+    },
+    {
+        "id": "292dec60ce851313",
+        "type": "http request",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/login",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 650,
+        "y": 240,
+        "wires": [
+            [
+                "b667f12b34b4cc49"
+            ]
+        ]
+    },
+    {
+        "id": "b667f12b34b4cc49",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "store sid",
+        "func": "// Try JSON sid first\nlet sid = msg.payload?.data?.sid;\n\n// If not present, try Set-Cookie header\nif (!sid) {\n  const setCookie = msg.headers?.['set-cookie'] || msg.headers?.['Set-Cookie'];\n  // set-cookie may be an array\n  const cookies = Array.isArray(setCookie) ? setCookie : [setCookie].filter(Boolean);\n\n  for (const c of cookies) {\n    const m = String(c).match(/ZWAYSession=([^;]+)/);\n    if (m) { sid = m[1]; break; }\n  }\n}\n\nif (!sid) {\n  node.error(\"Login response did not include sid or ZWAYSession cookie.\", {\n    payload: msg.payload,\n    headers: msg.headers\n  });\n  return null;\n}\n\nglobal.set(\"zway_sid\", sid);\nnode.warn(\"SID stored successfully\");\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "60c59ba69583eccd",
+        "type": "inject",
+        "z": "e77b158f9548e1ec",
+        "name": "Start influxDB Move",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 540,
+        "wires": [
+            [
+                "b866c86d39b9c272"
+            ]
+        ]
+    },
+    {
+        "id": "bb4a9ea25608c426",
+        "type": "change",
+        "z": "e77b158f9548e1ec",
+        "name": "power gauge",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "plug.power",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1630,
+        "y": 560,
+        "wires": [
+            [
+                "bb6282d64577862d"
+            ]
+        ]
+    },
+    {
+        "id": "06ac053b1f3ca69c",
+        "type": "change",
+        "z": "e77b158f9548e1ec",
+        "name": "Energy",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "plug.energy",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1620,
+        "y": 600,
+        "wires": [
+            [
+                "bb6282d64577862d"
+            ]
+        ]
+    },
+    {
+        "id": "4f9ceece5f92ff20",
+        "type": "change",
+        "z": "e77b158f9548e1ec",
+        "name": "Over-current",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "plug.overCurrent",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1630,
+        "y": 640,
+        "wires": [
+            [
+                "bb6282d64577862d"
+            ]
+        ]
+    },
+    {
+        "id": "513a3ffbd368778a",
+        "type": "change",
+        "z": "e77b158f9548e1ec",
+        "name": "Over-load",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "plug.overLoad",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1620,
+        "y": 680,
+        "wires": [
+            [
+                "bb6282d64577862d"
+            ]
+        ]
+    },
+    {
+        "id": "bb6282d64577862d",
+        "type": "join",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "2",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1910,
+        "y": 580,
+        "wires": [
+            [
+                "f203b85e22fe7b0a"
+            ]
+        ]
+    },
+    {
+        "id": "f203b85e22fe7b0a",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "function 7",
+        "func": "const p = msg.payload || {};\n\nfunction toFloat(v) {\n  const n = Number(v);\n  return Number.isFinite(n) ? n : null;\n}\n\nfunction stateToInt(v) {\n  const s = String(v).toLowerCase().trim();\n\n  // not active\n  if (\n    s === \"0\" || s === \"false\" ||\n    s.includes(\"off\") || s.includes(\"idle\") || s.includes(\"clear\") ||\n    s.includes(\"stable\") || s.includes(\"ok\") || s.includes(\"normal\") ||\n    s.includes(\"no\") || s.includes(\"none\")\n  ) return 0;\n\n  // active\n  if (\n    s === \"1\" || s === \"true\" ||\n    s.includes(\"on\") || s.includes(\"alarm\") ||\n    s.includes(\"over\") || s.includes(\"trigger\") ||\n    s.includes(\"detect\") || s.includes(\"breach\")\n  ) return 1;\n\n  const n = Number(v);\n  if (Number.isFinite(n)) return n ? 1 : 0;\n\n  return null;\n}\n\n// Read dotted keys from Join output\nconst power = toFloat(p[\"plug.power\"]);\nconst energy = toFloat(p[\"plug.energy\"]);\nconst overCurrent = stateToInt(p[\"plug.overCurrent\"]);\nconst overLoad = stateToInt(p[\"plug.overLoad\"]);\n\n// If missing, warn and skip write\nconst missing = [];\nif (power === null) missing.push(\"plug.power\");\nif (energy === null) missing.push(\"plug.energy\");\nif (overCurrent === null) missing.push(\"plug.overCurrent\");\nif (overLoad === null) missing.push(\"plug.overLoad\");\n\nif (missing.length) {\n  node.warn(\"Missing/invalid fields: \" + missing.join(\", \") + \" | payload=\" + JSON.stringify(p));\n  return null;\n}\n\n// Write to Influx\nmsg.payload = [\n  {\n    plug_power: power,          // watts (usually)\n    plug_energy: energy,        // kWh or Wh depending on device\n    plug_overCurrent: overCurrent, // 0/1\n    plug_overLoad: overLoad        // 0/1\n  },\n  { device: \"plug\", source: \"zway\" }\n];\n\nmsg.measurement = \"plug\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2060,
+        "y": 580,
+        "wires": [
+            [
+                "441103409e046ca8"
+            ]
+        ]
+    },
+    {
+        "id": "7343c1c5bc69b099",
+        "type": "debug",
+        "z": "e77b158f9548e1ec",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2840,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "441103409e046ca8",
+        "type": "influxdb out",
+        "z": "e77b158f9548e1ec",
+        "influxdb": "6c9ec3115d61e7d3",
+        "name": "smart_echo Bucket",
+        "measurement": "plug",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Rgroup",
+        "bucket": "smart_echo",
+        "x": 2250,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "97d10ba9a0b31c46",
+        "type": "ui-switch",
+        "z": "e77b158f9548e1ec",
+        "d": true,
+        "name": "Switch",
+        "label": "switch",
+        "group": "f51783401afac088",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": false,
+        "topic": "payload",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "layout": "row-left",
+        "clickableArea": "label",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 670,
+        "y": 920,
+        "wires": [
+            [
+                "e6f777037e5e5cab"
+            ]
+        ]
+    },
+    {
+        "id": "e6f777037e5e5cab",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "d": true,
+        "name": "function 9",
+        "func": "const host = \"http://10.183.67.137:8083\";\nconst vdev = \"ZWayVDev_zway_17-0-37\";\n\nmsg.method = \"GET\";\nmsg.url = `${host}/ZAutomation/api/v1/devices/${vdev}/command/${msg.payload}`;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 920,
+        "wires": [
+            [
+                "55126cf0c3c49680"
+            ]
+        ]
+    },
+    {
+        "id": "55126cf0c3c49680",
+        "type": "http request",
+        "z": "e77b158f9548e1ec",
+        "d": true,
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.183.67.137:8083/ZAutomation/api/v1/devices/ZWayVDev_zway_17-0-37/command/on",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1130,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7b30b40ae7371bfd",
+        "type": "function",
+        "z": "e77b158f9548e1ec",
+        "name": "On/Off",
+        "func": "msg.payload = msg.payload === 1 ? \"ON\" : \"OFF\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 300,
+        "wires": [
+            [
+                "b0f8ba9c35833b8e"
+            ]
+        ]
+    },
+    {
+        "id": "b0f8ba9c35833b8e",
+        "type": "ui-text",
+        "z": "e77b158f9548e1ec",
+        "group": "f51783401afac088",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "PLUG",
+        "label": "Plug Status : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "style": true,
+        "font": "Trebuchet MS,Helvetica,sans-serif",
+        "fontSize": "20",
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1650,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "0bbbde87c2767410",
+        "type": "http request",
+        "z": "e77b158f9548e1ec",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "persist": false,
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 410,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a020d81549b3c445",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.30.0",
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    }
+]
