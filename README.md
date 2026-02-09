@@ -114,10 +114,5 @@ Phase distribution:
 
 ---
 
-## Project Repository
-**Note:** The complete project implementation is available in the GitLab repository.
-
----
-
 ## Project Status
 Completed core pipeline of the project and succeeded in making the dashboard, but there is always scope for improvements, and this project can be worked on further for improvements in automation.
